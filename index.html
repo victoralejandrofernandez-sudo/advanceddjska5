@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdvancedDJs | Victor Fernandez DJ | V14</title>
+<title>AdvancedDJs | Victor Fernandez DJ | V18</title>
 <style>
   :root{
     --bg:#07101f;
@@ -706,6 +706,24 @@
     const img=document.createElement('img'); img.src=url; img.alt=file.name||'Evento AdvancedDJs';
     box.append(selector,img); gallery.appendChild(box);
   }
+  function appendPublicPhoto(src, alt){
+    const empty=document.getElementById('galleryEmpty'); if(empty) empty.remove();
+    const box=document.createElement('div'); box.className='photo public-photo';
+    const selector=document.createElement('button');
+    selector.type='button'; selector.className='photo-selector'; selector.textContent='✓';
+    selector.title='Foto publicada'; selector.setAttribute('aria-label','Foto publicada');
+    const img=document.createElement('img'); img.src=src; img.alt=alt||'Evento AdvancedDJs'; img.loading='lazy';
+    box.append(selector,img); gallery.appendChild(box);
+  }
+
+  const PUBLIC_PHOTOS = [
+    {src:'photos/advanced-victor-01.png', alt:'AdvancedDJs · Victor Fernandez DJ'},
+    {src:'photos/advanced-victor-02.png', alt:'AdvancedDJs · Victor Fernandez DJ · Electronic Music'},
+    {src:'photos/advanced-djs-victor-cristian-01.png', alt:'AdvancedDJs · Victor Fernandez DJ · Cristian Paez DJ'},
+    {src:'photos/advanced-djs-victor-cristian-02.png', alt:'AdvancedDJs · Victor Fernandez DJ · Cristian Paez DJ · Electronic Music'}
+  ];
+  PUBLIC_PHOTOS.forEach(p=>appendPublicPhoto(p.src,p.alt));
+
   async function savePhotoFiles(fileList){
     for(const file of [...fileList]){
       // V14: mostrar primero, guardar después. Así la galería funciona aunque falle IndexedDB.
@@ -725,14 +743,16 @@
   });
   clearPhotos.addEventListener('click', async()=>{
     await dbClear('photos');
-    gallery.querySelectorAll('.photo img').forEach(i=>URL.revokeObjectURL(i.src));
-    gallery.innerHTML='<div class="empty" id="galleryEmpty">Tus fotos de eventos aparecerán acá.</div>';
+    gallery.querySelectorAll('.photo:not(.public-photo) img').forEach(i=>{ if(i.src.startsWith('blob:')) URL.revokeObjectURL(i.src); });
+    gallery.querySelectorAll('.photo:not(.public-photo)').forEach(p=>p.remove());
+    if(!gallery.querySelector('.photo')) gallery.innerHTML='<div class="empty" id="galleryEmpty">Tus fotos de eventos aparecerán acá.</div>';
     updatePhotoSelectionUi();
   });
 
   clearSelectedPhoto.addEventListener('click', async()=>{
     const box=gallery.querySelector('.photo.selected');
     if(!box) return;
+    if(box.classList.contains('public-photo')){ box.classList.remove('selected'); updatePhotoSelectionUi(); return; }
     const img=box.querySelector('img');
     const dbId=box.dataset.dbId ? Number(box.dataset.dbId) : null;
     if(dbId != null && Number.isFinite(dbId)) await dbDelete('photos',dbId);
@@ -836,7 +856,11 @@
   const vctx = visualizer.getContext('2d');
   let audioCtx, analyser, sourceNode, freqData, animationId;
 
-  let tracks = [];
+  let tracks = [
+    {name:'Machine', artist:'Joris Voorn · Roddy Lima · Taylr Renee', url:'02-joris-voorn-machine.mp3', fallbackUrl:'music/02-joris-voorn-machine.mp3', coverUrl:null, dbId:null, public:true},
+    {name:'Lose My Mind', artist:'MAXTAGE · Azar Jalil · Lumineth', url:'03-maxtage-lose-my-mind.mp3', fallbackUrl:'music/03-maxtage-lose-my-mind.mp3', coverUrl:null, dbId:null, public:true},
+    {name:'Nothing Like the Rain', artist:'2 Unlimited', url:'04-2-unlimited-nothing-like-the-rain.mp3', fallbackUrl:'music/04-2-unlimited-nothing-like-the-rain.mp3', coverUrl:null, dbId:null, public:true}
+  ];
   let current = -1;
 
   function ensureVisualizer(){
@@ -1007,20 +1031,22 @@
         } else loadTrack(index,true);
       };
       const info = document.createElement('div');
-      info.innerHTML = `<div class="track-title">${track.name}</div><small>AdvancedDJs</small>`;
+      info.innerHTML = `<div class="track-title">${track.name}</div><small>${track.artist || 'AdvancedDJs'}</small>`;
       const remove = document.createElement('button');
       remove.className = 'remove';
       remove.textContent = '×';
+      if(track.public) remove.style.visibility='hidden';
       remove.title = 'Quitar';
       remove.onclick = () => {
+        if(track.public) return;
         if (current === index){
           audio.pause(); document.body.classList.remove('music-playing'); audio.removeAttribute('src'); current = -1;
           nowTitle.textContent = 'AdvancedDJs Player';
           nowSub.textContent = 'Cargá música para comenzar';
           resetCover();
         } else if (current > index) current--;
-        URL.revokeObjectURL(track.url);
-        if (track.coverUrl) URL.revokeObjectURL(track.coverUrl);
+        if(track.url && track.url.startsWith('blob:')) URL.revokeObjectURL(track.url);
+        if (track.coverUrl && track.coverUrl.startsWith('blob:')) URL.revokeObjectURL(track.coverUrl);
         if (track.dbId != null) dbDelete('tracks',track.dbId).catch(console.warn);
         tracks.splice(index,1);
         renderTracks();
@@ -1033,13 +1059,37 @@
   function loadTrack(index, autoplay=false){
     if (!tracks[index]) return;
     current = index;
-    audio.src = tracks[index].url;
-    nowTitle.textContent = tracks[index].name;
-    nowSub.textContent = tracks[index].coverUrl ? 'AdvancedDJs · Carátula detectada' : 'AdvancedDJs';
-    showCover(tracks[index]);
+    const track = tracks[index];
+    track._triedFallback = false;
+    track._autoplayWanted = !!autoplay;
+    audio.src = track.url;
+    nowTitle.textContent = track.name;
+    nowSub.textContent = track.artist || (track.coverUrl ? 'AdvancedDJs · Carátula detectada' : 'AdvancedDJs');
+    showCover(track);
     renderTracks();
-    if (autoplay) audio.play();
+    if (autoplay) {
+      const p = audio.play();
+      if (p && p.catch) p.catch(()=>{});
+    }
   }
+
+  // V18: si una canción no está en la raíz, prueba automáticamente /music.
+  // Así funciona tanto con la estructura actual de GitHub como con una carpeta local completa.
+  audio.addEventListener('error', () => {
+    if (current < 0 || !tracks[current]) return;
+    const track = tracks[current];
+    if (track.fallbackUrl && !track._triedFallback){
+      track._triedFallback = true;
+      audio.src = track.fallbackUrl;
+      if (track._autoplayWanted){
+        const p = audio.play();
+        if (p && p.catch) p.catch(()=>{});
+      }
+      return;
+    }
+    nowSub.textContent = 'Audio no encontrado en esta ubicación';
+    playBtn.textContent = '▶';
+  });
 
   audioInput.addEventListener('change', async () => {
     const files=[...audioInput.files];
@@ -1101,8 +1151,11 @@
   clearTracks.addEventListener('click', async () => {
     await dbClear('tracks');
     audio.pause(); audio.removeAttribute('src');
-    tracks.forEach(t => { URL.revokeObjectURL(t.url); if (t.coverUrl) URL.revokeObjectURL(t.coverUrl); });
-    tracks = []; current = -1;
+    tracks.filter(t=>!t.public).forEach(t => {
+      if(t.url && t.url.startsWith('blob:')) URL.revokeObjectURL(t.url);
+      if(t.coverUrl && t.coverUrl.startsWith('blob:')) URL.revokeObjectURL(t.coverUrl);
+    });
+    tracks = tracks.filter(t=>t.public); current = -1;
     nowTitle.textContent='AdvancedDJs Player';
     nowSub.textContent='Cargá música para comenzar';
     resetCover();
@@ -1122,6 +1175,7 @@
       if(tracks.length && current===-1) loadTrack(0,false); else renderTracks();
     }catch(e){ console.warn('No se pudo restaurar la biblioteca local',e); }
   }
+  if(tracks.length && current===-1) loadTrack(0,false); else renderTracks();
   restoreSavedMedia();
 
   // V3 — identidad visual reactiva
