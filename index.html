@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdvancedDJs | Victor Fernandez DJ | V24</title>
+<title>AdvancedDJs | Victor Fernandez DJ | V25</title>
 <style>
   :root{
     --bg:#07101f;
@@ -419,32 +419,6 @@
     .admin-access{left:max(10px,env(safe-area-inset-left));bottom:max(154px,calc(140px + env(safe-area-inset-bottom)))}
   }
 
-
-  /* V23: separación prolija entre los accesos de Contacto */
-  #igCard .direct-link + .direct-link{
-    margin-top:14px !important;
-  }
-
-
-  /* V24: Instagram y WhatsApp como tarjetas independientes */
-  .contact-grid{
-    display:flex !important;
-    flex-wrap:wrap !important;
-    gap:14px !important;
-    align-items:stretch !important;
-  }
-  .contact-card{
-    width:295px;
-    min-height:250px;
-  }
-  .whatsapp-card{
-    border:1px solid rgba(0,229,229,.28);
-  }
-  .whatsapp-card .direct-link{
-    margin-top:auto !important;
-    border-color:#00d67a !important;
-  }
-
 </style>
 </head>
 <body>
@@ -581,7 +555,21 @@
       <div class="contact-card">
         <div><div class="contact-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="igG" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ffb000"/><stop offset=".45" stop-color="#ff3366"/><stop offset="1" stop-color="#7a3cff"/></linearGradient></defs><rect x="3" y="3" width="26" height="26" rx="7" fill="url(#igG)"/><circle cx="16" cy="16" r="6" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="23.4" cy="8.7" r="1.5" fill="#fff"/></svg></div><b>Instagram</b><span class="muted" id="igText">Seguinos y mirá nuestros eventos</span></div>
         <a class="direct-link" id="igLink" href="https://www.instagram.com/advanceddjs/" target="_blank" rel="noopener">Abrir Instagram ↗</a>
-        
+      </div>
+
+      <div style="grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border:1px solid rgba(37,211,102,.45);border-radius:14px;background:#0b1726;max-width:620px;">
+        <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+          <div style="font-size:24px;line-height:1;">🟢</div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <b style="font-size:15px;">Compartir AdvancedDJs</b>
+            <span class="muted" style="font-size:13px;">Enviá esta web por WhatsApp</span>
+          </div>
+        </div>
+        <a href="https://wa.me/?text=%F0%9F%8E%A7%20AdvancedDJs%20%E2%80%94%20Donde%20la%20m%C3%BAsica%20y%20el%20estilo%20se%20encuentran.%0Ahttps%3A%2F%2Fvictoralejandrofernandez-sudo.github.io%2Fadvanceddjska5%2F"
+           target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border:1px solid #25D366;border-radius:10px;font-weight:800;text-decoration:none;white-space:nowrap;">
+          Compartir ↗
+        </a>
       </div>
     </div>
   </section>
