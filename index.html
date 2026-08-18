@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdvancedDJs | Victor Fernandez DJ | V26</title>
+<title>AdvancedDJs | Victor Fernandez DJ | V27</title>
 <style>
   :root{
     --bg:#07101f;
@@ -420,7 +420,7 @@
   }
 
 
-  /* V26: bloque independiente para compartir la web por WhatsApp */
+  /* V27: compartir web sin alterar las tarjetas de Contacto */
   .share-web-box{
     margin-top:14px;
     width:min(620px,100%);
@@ -433,46 +433,19 @@
     border-radius:14px;
     background:linear-gradient(180deg,#0b1728,#09121f);
   }
-  .share-web-left{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    min-width:0;
-  }
+  .share-web-left{display:flex;align-items:center;gap:14px;min-width:0}
   .share-web-dot{
-    width:24px;
-    height:24px;
-    flex:0 0 24px;
-    border-radius:50%;
+    width:24px;height:24px;flex:0 0 24px;border-radius:50%;
     background:radial-gradient(circle at 35% 30%,#c9ffe2 0%,#68e9a0 35%,#25D366 70%,#0b7f45 100%);
-    box-shadow:0 0 16px rgba(37,211,102,.18);
   }
-  .share-web-copy{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-    min-width:0;
-  }
+  .share-web-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
   .share-web-copy b{font-size:15px}
   .share-web-copy span{font-size:13px;color:var(--muted)}
   .share-web-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:138px;
-    padding:11px 16px;
-    border:1px solid #25D366;
-    border-radius:10px;
-    color:#fff;
-    text-decoration:none;
-    font-weight:800;
-    background:#071f24;
-    transition:.2s ease;
-    white-space:nowrap;
-  }
-  .share-web-btn:hover{
-    background:#0a3530;
-    transform:translateY(-1px);
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:138px;padding:11px 16px;border:1px solid #25D366;
+    border-radius:10px;color:#fff;text-decoration:none;font-weight:800;
+    background:#071f24;white-space:nowrap;
   }
   @media(max-width:620px){
     .share-web-box{flex-wrap:wrap}
@@ -792,7 +765,7 @@
     {src:'fotos/ChatGPT Image 17 ago 2026, 06_22_52 p.m.png', alt:'AdvancedDJs · Victor Fernandez DJ · Electronic Music'},
     {src:'fotos/Gemini_Generated_Image_3d1a7b3d1a7b3d1a.png', alt:'AdvancedDJs · Evento'},
     {src:'fotos/Gemini_Generated_Image_d3ipm6d3ipm6d3ip.png', alt:'AdvancedDJs · Evento'},
-    {src:'fotos/Gemini_Generated_Image_l5sibu5sibu5si.png', alt:'AdvancedDJs · Evento'},
+    {src:'fotos/Gemini_Generated_Image_l5sibul5sibul5si.png', alt:'AdvancedDJs · Evento'},
     {src:'fotos/Gemini_Generated_Image_qjl26hqjl26hqjl2.png', alt:'AdvancedDJs · Evento'}
   ];
   PUBLIC_PHOTOS.forEach(p=>appendPublicPhoto(p.src,p.alt));
