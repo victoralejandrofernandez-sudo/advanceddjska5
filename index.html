@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdvancedDJs | Victor Fernandez DJ | V29</title>
+<title>AdvancedDJs | Victor Fernandez DJ | V31</title>
 <style>
   :root{
     --bg:#07101f;
@@ -531,9 +531,65 @@
     #contacto .contact-grid{grid-template-columns:1fr}
   }
 
+
+.artist-identity{text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at 15% 15%,rgba(255,75,170,.10),transparent 28%),radial-gradient(circle at 85% 80%,rgba(8,231,231,.10),transparent 28%),linear-gradient(145deg,#07101d,#0b1424)}
+.identity-kicker{color:#87a3b7;font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase}
+.identity-title{margin:10px 0 8px;font-size:clamp(31px,5vw,54px);font-weight:900;letter-spacing:-1.5px}.identity-title span{background:linear-gradient(90deg,#ff9954,#ff5da9,#a27cff,#42dff1,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.identity-lead{max-width:720px;margin:14px auto 24px;color:#c4d0dc;font-size:17px}.artist-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px;margin:auto}
+.artist-profile{text-align:left;padding:17px 18px;border:1px solid #1b405a;border-radius:14px;background:rgba(5,17,29,.72)}.artist-profile b{display:block;font-size:18px;margin-bottom:5px}.artist-profile span{color:#91a7b9;font-size:13px}
+.identity-signature{margin-top:20px;color:#e7f8fb;font-size:13px;font-weight:800;letter-spacing:.7px}.presentation-btn{margin-top:24px;border:1px solid rgba(8,231,231,.55);background:#062a38;color:#eaffff;padding:13px 22px;border-radius:999px;font-weight:900;cursor:pointer}
+.dj-presentation{position:fixed;inset:0;z-index:200;display:none;background:radial-gradient(circle at 20% 20%,#29142c 0,transparent 35%),radial-gradient(circle at 80% 80%,#082b36 0,transparent 35%),#02060c;color:#fff}.dj-presentation.open{display:block}
+.presentation-close{position:absolute;right:22px;top:22px;z-index:5;width:46px;height:46px;border-radius:50%;border:1px solid #315268;background:#08131d;color:#fff;font-size:25px;cursor:pointer}
+.presentation-stage{height:100%;display:grid;place-items:center;padding:70px 24px}.presentation-slide{position:absolute;width:min(900px,88vw);text-align:center;opacity:0;transform:translateY(18px);transition:.7s;pointer-events:none}.presentation-slide.active{opacity:1;transform:none}
+.ps-brand{font-size:clamp(52px,11vw,112px);font-weight:950;letter-spacing:-4px;line-height:.9}.ps-brand span{color:#08e7e7}.ps-tag{font-size:clamp(20px,3vw,32px);font-weight:700;margin-top:20px}.ps-small{margin-top:15px;color:#8fa8ba;font-size:13px;letter-spacing:1.4px;text-transform:uppercase}
+.ps-big{font-size:clamp(32px,6vw,66px);font-weight:900;line-height:1.05}.ps-gradient{background:linear-gradient(90deg,#ff9954,#ff5da9,#a27cff,#42dff1,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}.ps-duo{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:25px}.ps-person{min-width:250px;padding:18px;border-top:1px solid #1c6c7e;border-bottom:1px solid #263b55}.ps-person span{display:block;color:#8fa8ba;margin-top:7px}
+.presentation-progress{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;gap:7px}.presentation-progress span{width:28px;height:3px;background:#263746}.presentation-progress span.active{background:#08e7e7}
+@media(max-width:700px){.artist-duo{grid-template-columns:1fr}.identity-lead{font-size:15px}}
+
+
+/* V31 · EXPERIENCIA ADVANCEDDJS */
+.experience-section{
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#07101c,#091522);
+}
+.experience-intro{max-width:720px;color:#aebdca;margin-top:-8px;margin-bottom:22px}
+.experience-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.experience-card{
+  position:relative;min-height:190px;padding:22px 19px;border-radius:16px;
+  border:1px solid #193b54;background:linear-gradient(180deg,#0b1727,#08111e);
+  overflow:hidden;transform:translateY(18px);opacity:0;
+  transition:opacity .65s ease,transform .65s ease,border-color .25s ease;
+}
+.experience-card.visible{transform:none;opacity:1}
+.experience-card:nth-child(2){transition-delay:.10s}
+.experience-card:nth-child(3){transition-delay:.20s}
+.experience-card:hover{border-color:#1c8295}
+.experience-number{font-size:11px;color:#68859a;letter-spacing:2px;font-weight:900}
+.experience-card h3{font-size:23px;margin:24px 0 9px;color:#fff}
+.experience-card p{font-size:14px;color:#9fb0bf;margin:0}
+.experience-line{position:absolute;left:19px;right:19px;top:53px;height:1px;background:linear-gradient(90deg,#ff765e,#b86cff,#08e7e7,transparent);opacity:.55}
+.experience-card::after{content:"";position:absolute;width:150px;height:150px;right:-70px;bottom:-80px;border:1px solid rgba(8,231,231,.15);border-radius:50%;box-shadow:0 0 38px rgba(8,231,231,.05)}
+.identity-actions{margin-top:24px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.listen-now-btn{
+  border:1px solid rgba(255,94,166,.55);background:rgba(48,13,38,.72);color:#fff;
+  padding:13px 22px;border-radius:999px;font-weight:900;cursor:pointer;transition:.2s ease;
+}
+.listen-now-btn:hover{transform:translateY(-2px);border-color:#ff6baa;box-shadow:0 0 25px rgba(255,92,169,.12)}
+@media(max-width:760px){.experience-grid{grid-template-columns:1fr}.experience-card{min-height:155px}}
+
 </style>
 </head>
 <body>
+
+<div class="dj-presentation" id="djPresentation" aria-hidden="true">
+<button class="presentation-close" id="presentationClose" type="button">×</button>
+<div class="presentation-stage">
+<div class="presentation-slide active"><div class="ps-brand">Advanced<span>DJs</span></div><div class="ps-tag">“Donde la música y el estilo se encuentran”</div><div class="ps-small">Electronic Music · DJ Culture</div></div>
+<div class="presentation-slide"><div class="ps-big">Dos DJs.<br><span class="ps-gradient">Una misma energía.</span></div><div class="ps-duo"><div class="ps-person"><b>Victor Fernandez DJ</b><span>Indie Dance · Trance · House</span></div><div class="ps-person"><b>Cristian Paez DJ</b><span>Progressive House · Melodic House · Techno</span></div></div></div>
+<div class="presentation-slide"><div class="ps-big ps-gradient">SENTÍ LA MÚSICA.<br>VIVÍ LA EXPERIENCIA.</div><div class="ps-tag">DJ Sets · Sonido · Iluminación · Electronic Music</div></div>
+<div class="presentation-slide"><div class="ps-brand">Advanced<span>DJs</span></div><div class="ps-tag">Escuchanos. Conocenos. Viví nuestra música.</div><div class="ps-small">@advanceddjs · victoralejandrofernandez-sudo.github.io/advanceddjska5/</div></div>
+</div><div class="presentation-progress" id="presentationProgress"><span class="active"></span><span></span><span></span><span></span></div></div>
+
 <div class="music-side-fx" id="musicSideFx" aria-hidden="true">
   <div class="side-zone left">
     <span class="side-beam sb1"></span><span class="side-beam sb2"></span><span class="side-beam sb3"></span><span class="side-beam sb4"></span>
@@ -553,7 +609,7 @@
     <div style="margin-top:14px;font-size:clamp(20px,2.6vw,30px);font-weight:700;color:#ffffff;letter-spacing:.2px;">
       “Donde la música y el estilo se encuentran”
     </div>
-    <div class="tagline">DJ sets, iluminación profesional y sonido para crear una experiencia completa en cada evento.</div>
+    <div class="tagline">Electronic Music, DJ sets y una puesta visual pensada para transformar cada encuentro en una experiencia.</div>
     <div class="chips">
       <span class="chip">DJ Sets personalizados</span>
       <span class="chip">Iluminación inteligente</span>
@@ -566,6 +622,8 @@
 <nav class="quick-nav" aria-label="Menú principal">
   <div class="quick-nav-inner">
     <a class="quick-link" href="#inicio"><span class="mi">⌂</span>Inicio</a>
+    <a class="quick-link" href="#identidad"><span class="mi">✦</span>Identidad</a>
+    <a class="quick-link" href="#experiencia"><span class="mi">◇</span>Experiencia</a>
     <a class="quick-link" href="#quienes"><span class="mi">◉</span>Quiénes somos</a>
     <a class="quick-link" href="#presentacion"><span class="mi">▤</span>Presentación</a>
     <a class="quick-link" href="#servicios"><span class="mi">✦</span>Servicios</a>
@@ -577,6 +635,45 @@
 </nav>
 
 <main class="wrap">
+
+
+  <section class="section artist-identity" id="identidad">
+    <div class="identity-kicker">AdvancedDJs · Electronic Music</div>
+    <div class="identity-title">Dos DJs. <span>Una misma energía.</span></div>
+    <p class="identity-lead">Música, imagen y atmósfera como una sola experiencia. AdvancedDJs nace de dos estilos que se encuentran en la cabina y construyen una identidad propia.</p>
+    <div class="artist-duo">
+      <div class="artist-profile"><b>Victor Fernandez DJ</b><span>Indie Dance · Trance · House</span></div>
+      <div class="artist-profile"><b>Cristian Paez DJ</b><span>Progressive House · Melodic House · Techno</span></div>
+    </div>
+    <div class="identity-signature">DJ SETS · SONIDO · ILUMINACIÓN · ELECTRONIC MUSIC</div>
+    <div class="identity-actions">
+      <button class="presentation-btn" id="presentationBtn" type="button">PRESENTACIÓN ▶</button>
+      <button class="listen-now-btn" id="listenNowBtn" type="button">ESCUCHAR AHORA ♫</button>
+    </div>
+  </section>
+
+
+  <section class="section experience-section" id="experiencia">
+    <h2>Experiencia</h2>
+    <p class="experience-intro">No se trata solamente de reproducir música. Buscamos construir un clima donde sonido, luz y selección musical formen parte de una misma identidad.</p>
+    <div class="experience-grid">
+      <article class="experience-card">
+        <div class="experience-number">01 · SOUND</div><div class="experience-line"></div>
+        <h3>Música</h3>
+        <p>Sets con personalidad, recorrido y energía. La música como centro de toda la experiencia.</p>
+      </article>
+      <article class="experience-card">
+        <div class="experience-number">02 · LIGHT</div><div class="experience-line"></div>
+        <h3>Iluminación</h3>
+        <p>Movimiento, color y ritmo visual acompañando cada momento sin competir con la música.</p>
+      </article>
+      <article class="experience-card">
+        <div class="experience-number">03 · ATMOSPHERE</div><div class="experience-line"></div>
+        <h3>Atmósfera</h3>
+        <p>Una puesta cuidada para que cada encuentro tenga carácter, presencia y una estética propia.</p>
+      </article>
+    </div>
+  </section>
 
   <section class="section" id="quienes">
     <h2>Quiénes Somos</h2>
@@ -650,7 +747,7 @@
 
   <section class="section" id="contacto">
     <h2>Contacto</h2>
-    <p class="muted" style="margin-top:-10px;margin-bottom:18px">Consultas, eventos y contrataciones de AdvancedDJs.</p>
+    <p class="muted" style="margin-top:-10px;margin-bottom:18px">Conectá con AdvancedDJs · música, fechas, eventos y propuestas.</p>
     <div class="contact-grid">
       <div class="contact-card" id="waCard">
         <div><div class="contact-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#25D366"/><path fill="#fff" d="M23.7 8.5A10.7 10.7 0 0 0 6.9 21.4L5.5 26.5l5.2-1.4a10.7 10.7 0 0 0 13-16.6Zm-7.6 15.7a8.8 8.8 0 0 1-4.5-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.9 8.9 0 1 1 7.3 3.9Zm4.9-6.6c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.5.8-1.7.1-.2 0-.4 0-.5l-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 3 1.3 3.2c.1.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.7.7.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.2.1-1.3-.1-.2-.3-.2-.6-.3Z"/></svg></div><b>WhatsApp</b><span class="muted" id="waText">Contacto directo</span></div>
@@ -678,7 +775,7 @@
         </span>
         <div class="whatsapp-contact-copy">
           <b>WhatsApp</b>
-          <span>Consultas y contrataciones · +54 358 487-1451</span>
+          <span>Contacto directo · +54 358 487-1451</span>
         </div>
       </div>
       <a class="whatsapp-contact-btn" href="https://wa.me/543584871451?text=Hola%20AdvancedDJs%2C%20quisiera%20consultar%20por%20un%20evento." target="_blank" rel="noopener">Escribirme ↗</a>
@@ -1446,5 +1543,31 @@
   }
 })();
 </script>
+<script>
+(()=>{const m=document.getElementById('djPresentation'),b=document.getElementById('presentationBtn'),c=document.getElementById('presentationClose'),s=[...m.querySelectorAll('.presentation-slide')],d=[...document.querySelectorAll('#presentationProgress span')];let i=0,t;function sh(n){i=n%s.length;s.forEach((x,j)=>x.classList.toggle('active',j===i));d.forEach((x,j)=>x.classList.toggle('active',j===i))}function op(){sh(0);m.classList.add('open');document.body.style.overflow='hidden';clearInterval(t);t=setInterval(()=>sh(i+1),4300)}function cl(){m.classList.remove('open');document.body.style.overflow='';clearInterval(t)}b?.addEventListener('click',op);c?.addEventListener('click',cl);document.addEventListener('keydown',e=>{if(e.key==='Escape')cl()})})();
+</script>
+
+<script>
+(()=> {
+  const cards=[...document.querySelectorAll('.experience-card')];
+  if('IntersectionObserver' in window){
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
+    },{threshold:.18});
+    cards.forEach(c=>obs.observe(c));
+  } else cards.forEach(c=>c.classList.add('visible'));
+
+  const listen=document.getElementById('listenNowBtn');
+  listen?.addEventListener('click',()=>{
+    const music=document.getElementById('musica');
+    music?.scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(()=>{
+      const first=document.querySelector('#trackList .play-track');
+      if(first) first.click();
+    },850);
+  });
+})();
+</script>
+
 </body>
 </html>
