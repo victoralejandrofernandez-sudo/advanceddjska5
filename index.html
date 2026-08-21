@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdvancedDJs | Victor Fernandez DJ | V44</title>
+<title>AdvancedDJs | Victor Fernandez DJ | V45 Music</title>
 <style>
   :root{
     --bg:#07101f;
@@ -2033,6 +2033,20 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   body.music-playing .hero-side-dot{animation:none!important}
 }
 
+
+  /* V45 · AdvancedDJs Music público */
+  #musica{background:radial-gradient(circle at 88% 8%,rgba(255,92,169,.055),transparent 27%),radial-gradient(circle at 10% 92%,rgba(8,231,231,.055),transparent 30%),rgba(5,11,22,.96)}
+  #musica .music-stage-heading h2{background:linear-gradient(90deg,#fff,#ff6baa,#9a7dff,#43def1);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #musica .music-stage-kicker{letter-spacing:1.5px}
+
+
+  /* V46 · acceso privado a biblioteca por Tailscale */
+  .private-library-box{margin:0 0 20px;padding:15px 16px;border:1px solid rgba(154,125,255,.38);border-radius:14px;background:linear-gradient(90deg,rgba(34,20,60,.52),rgba(6,31,43,.58));display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .private-library-copy{min-width:0}.private-library-copy b{display:block;color:#fff;font-size:15px}.private-library-copy span{display:block;margin-top:4px;color:#91a5b7;font-size:12px;line-height:1.45}
+  .private-library-btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 15px;border-radius:999px;border:1px solid rgba(154,125,255,.65);background:#17122a;color:#fff;text-decoration:none;font-weight:900;font-size:12px;white-space:nowrap;box-shadow:0 0 18px rgba(154,125,255,.08)}
+  .private-library-btn:hover{transform:translateY(-1px);border-color:#b99cff;background:#21183a}
+  @media(max-width:620px){.private-library-box{align-items:stretch;flex-direction:column}.private-library-btn{width:100%}}
+
 </style>
 </head>
 <body>
@@ -2307,7 +2321,12 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   </section>
 
   <section class="section" id="musica">
-    <div class="music-stage-heading"><h2>Mi Música / Sets</h2><div class="music-stage-kicker">AdvancedDJs · Electronic Music Selection</div></div>
+    <div class="music-stage-heading"><h2>🌐 AdvancedDJs Music</h2><div class="music-stage-kicker">MÚSICA PÚBLICA · AdvancedDJs · Electronic Music Selection</div></div>
+    <p class="muted" style="margin-top:-8px;margin-bottom:18px">Escuchá nuestra selección pública de temas y sets. La biblioteca privada de AdvancedDJs permanece separada y no se comparte desde esta página.</p>
+    <div class="private-library-box">
+      <div class="private-library-copy"><b>🔒 Mi biblioteca privada</b><span>Acceso personal a la música de tu PC. Funciona desde dispositivos autorizados en tu red Tailscale.</span></div>
+      <a class="private-library-btn" href="http://100.81.203.31:3000" target="_blank" rel="noopener">🎧 ABRIR MI MÚSICA</a>
+    </div>
     <div class="music-toolbar admin-ui">
       <label class="file-label" for="audioInput">＋ Agregar música</label>
       <input id="audioInput" type="file" accept="audio/*" multiple>
