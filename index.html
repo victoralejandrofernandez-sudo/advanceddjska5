@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdvancedDJs | Victor Fernandez DJ | V46 Pedidos</title>
+<title>AdvancedDJs | V52 Responsive Final</title>
 <style>
   :root{
     --bg:#07101f;
@@ -237,7 +237,7 @@
   body.music-playing .brand{filter:brightness(1.05)}
   .show-toggle{position:fixed;right:18px;bottom:132px;z-index:70;border:1px solid #17869a;background:rgba(4,28,39,.92);color:#eaffff;padding:10px 15px;border-radius:999px;font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.3)}
   .show-toggle.active{background:var(--cyan);color:#00171b;box-shadow:0 0 24px rgba(8,231,231,.34)}
-  body.show-mode #quienes,body.show-mode #presentacion,body.show-mode #servicios,body.show-mode #galeria,body.show-mode #contacto,body.show-mode #plataformas,body.show-mode #admin,body.show-mode footer{display:none!important}
+  body.show-mode #quienes,body.show-mode #presentacion,body.show-mode #servicios,body.show-mode #galeria,body.show-mode #contacto,body.show-mode #plataformas,body.show-mode footer{display:none!important}
   body.show-mode .hero{min-height:46vh}
   body.show-mode #musica{margin-top:24px}
   body.show-mode .wrap{width:min(1100px,calc(100% - 32px))}
@@ -1726,6 +1726,30 @@ body.music-playing .hero-mini-art{box-shadow:0 0 22px rgba(8,231,231,.13);transf
 .presentation-skip.prev{left:18px}
 .presentation-skip.next{right:18px}
 
+/* V51 · Presentación: ecosistema web horizontal, legible y público */
+.ps-sites{
+  display:flex;flex-direction:column;gap:10px;
+  width:min(820px,82vw);margin:28px auto 0;
+}
+.ps-site{
+  min-height:64px;padding:13px 20px;border:1px solid rgba(54,159,184,.50);border-radius:14px;
+  background:linear-gradient(90deg,rgba(8,24,39,.92),rgba(5,18,31,.82));
+  box-shadow:0 12px 30px rgba(0,0,0,.20);
+  display:grid;grid-template-columns:150px minmax(0,1fr);align-items:center;gap:18px;
+  text-align:left;opacity:0;transform:translateY(8px);animation:psSiteIn .55s ease forwards;
+}
+.ps-site:nth-child(1){animation-delay:.08s}.ps-site:nth-child(2){animation-delay:.20s}.ps-site:nth-child(3){animation-delay:.32s}
+.ps-site b{display:block;color:#fff;font-size:13px;letter-spacing:.8px;text-transform:uppercase}
+.ps-site span{display:block;color:#64eaf1;font-size:clamp(15px,1.7vw,20px);font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ps-follow{margin-top:22px;color:#9fb5c6;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800}
+@keyframes psSiteIn{to{opacity:1;transform:none}}
+@media(max-width:720px){
+  .ps-sites{width:min(560px,84vw);gap:8px;margin-top:18px}
+  .ps-site{grid-template-columns:1fr;gap:5px;min-height:58px;padding:11px 14px;text-align:center}
+  .ps-site span{font-size:clamp(12px,3.7vw,16px);white-space:nowrap;overflow:visible;text-overflow:clip}
+  .ps-follow{margin-top:15px;font-size:11px;letter-spacing:1.1px}
+}
+
 .presentation-slide-counter{
   position:absolute;right:24px;bottom:24px;z-index:6;
   color:#587488;font-size:9px;font-weight:900;letter-spacing:1.5px;
@@ -2058,10 +2082,270 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   .private-library-btn:hover{transform:translateY(-1px);border-color:#b99cff;background:#21183a}
   @media(max-width:620px){.private-library-box{align-items:stretch;flex-direction:column}.private-library-btn{width:100%}}
 
+
+/* V51 PUBLICA: ADMIN retirado de la interfaz y presentación de sitios en barras horizontales. */
+
+/* =========================================================
+   V52 RESPONSIVE FINAL · PC / NOTEBOOK / TABLET / CELULAR
+   Ajustes exclusivamente responsivos. No altera identidad,
+   contenido ni funciones principales de AdvancedDJs.
+   ========================================================= */
+
+/* Base fluida */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,canvas{max-width:100%}
+.wrap{width:min(1180px,calc(100% - 32px))}
+.hero-inner{width:min(1080px,100%)}
+.quick-nav-inner{justify-content:center}
+.section{scroll-margin-top:76px}
+
+/* PC grande */
+@media (min-width:1400px){
+  .wrap{width:min(1220px,calc(100% - 64px))}
+  .hero-inner{max-width:1120px}
+  .section{padding:34px 36px}
+  .live-grid{grid-template-rows:230px 230px}
+}
+
+/* Notebook / PC mediana */
+@media (min-width:901px) and (max-width:1399px){
+  .wrap{width:min(1060px,calc(100% - 28px))}
+  .section{padding:28px 28px;margin:26px 0}
+  .quick-nav-inner{width:min(1100px,calc(100% - 20px));justify-content:center}
+  .quick-link{padding:8px 10px;font-size:12px}
+  .hero{min-height:560px}
+  .hero-actions{gap:9px}
+  .hero-cta{padding:0 17px}
+}
+
+/* Tablet horizontal / vertical */
+@media (min-width:621px) and (max-width:900px){
+  body{padding-bottom:142px}
+  .wrap{width:min(100% - 24px,860px)}
+  .hero{min-height:auto;padding:52px 20px 44px}
+  .brand{font-size:clamp(54px,11vw,78px)}
+  .tagline{font-size:20px}
+  .chips{gap:8px}
+  .chip{font-size:12px;padding:8px 12px}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;max-width:690px;margin:25px auto 0}
+  .hero-cta{width:100%;min-height:48px;padding:0 14px}
+  .quick-nav-inner{justify-content:flex-start;padding-left:6px;padding-right:6px}
+  .quick-link{font-size:12px;padding:8px 10px}
+  .section{padding:25px 22px;margin:22px 0}
+  .identity-title{font-size:clamp(36px,7vw,50px)}
+  .artist-duo{grid-template-columns:1fr 1fr}
+  .experience-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .experience-card{padding:18px 15px;min-height:175px}
+  .experience-card h3{font-size:20px}
+  .live-grid{grid-template-columns:1fr 1fr;grid-template-rows:220px 180px}
+  .live-shot:first-child{grid-column:1/-1;grid-row:auto}
+  .dj-artists{grid-template-columns:1fr 1fr}
+  .services{grid-template-columns:1fr 1fr}
+  .music-stage{grid-template-columns:1fr}
+  .visualizer-card{min-height:190px}
+  #visualizer{height:135px}
+  .contact-grid{grid-template-columns:1fr 1fr!important}
+  .player-inner{grid-template-columns:minmax(0,1fr) auto;gap:10px}
+  .progress-area{grid-column:1/-1}
+}
+
+/* Celular */
+@media (max-width:620px){
+  body{padding-bottom:154px}
+  .wrap{width:calc(100% - 14px)}
+  .hero{min-height:auto;padding:34px 10px 28px}
+  .hero-inner{width:100%}
+  .brand{font-size:clamp(40px,14vw,58px);letter-spacing:-1.5px}
+  .tagline{font-size:16px;line-height:1.35;margin:15px auto 18px;padding:0 6px}
+  .chips{gap:6px}
+  .chip{font-size:10.5px;padding:7px 9px}
+  .hero-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:20px}
+  .hero-cta{width:100%;min-height:45px;padding:0 13px;font-size:12px}
+  .hero-scroll-cue{margin-top:17px}
+  .hero-mini-player{width:100%;max-width:none}
+  .quick-nav{top:0}
+  .quick-nav-inner{width:100%;justify-content:flex-start;padding:7px 6px;gap:3px}
+  .quick-link{font-size:11px;padding:7px 8px;border-radius:8px}
+  .quick-link .mi{margin-right:4px}
+  .section{margin:13px 0;padding:18px 14px;border-radius:14px}
+  h2{font-size:25px;margin-bottom:16px}
+  .identity-kicker{font-size:9px;letter-spacing:2px}
+  .identity-title{font-size:clamp(31px,10vw,42px);line-height:1.02}
+  .identity-lead{font-size:14px;margin:11px auto 18px}
+  .artist-duo{grid-template-columns:1fr;gap:9px}
+  .artist-profile{text-align:center;padding:14px}
+  .identity-signature{font-size:10px;line-height:1.5}
+  .identity-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:18px}
+  .presentation-btn,.listen-now-btn{width:100%;margin-top:0;padding:12px 15px}
+  .experience-intro{font-size:14px;margin-bottom:16px}
+  .experience-grid{grid-template-columns:1fr;gap:10px}
+  .experience-card{min-height:0;padding:17px 15px}
+  .experience-card h3{font-size:20px;margin:18px 0 7px}
+  .live-head{display:block}
+  .live-copy{text-align:left;margin-top:7px;font-size:13px}
+  .live-grid{grid-template-columns:1fr;grid-template-rows:none;gap:9px}
+  .live-shot,.live-shot:first-child{height:205px;grid-column:auto;grid-row:auto}
+  .dates-section{grid-template-columns:1fr;gap:15px}
+  .dates-badge{width:100%;min-width:0}
+  .djs-heading-row{display:block}
+  .djs-kicker{margin-top:6px}
+  .dj-artists{grid-template-columns:1fr;gap:10px}
+  .dj-artist-card{min-height:0;padding:19px 16px}
+  .dj-artist-index{margin-bottom:18px}
+  .dj-artist-name{font-size:29px}
+  .services{grid-template-columns:1fr;gap:9px}
+  .service{padding:13px}
+  .music-stage-heading{display:block!important}
+  .music-stage-kicker{margin-top:5px;text-align:left!important;font-size:9px!important}
+  .private-library-box{display:grid!important;grid-template-columns:1fr!important;gap:10px!important}
+  .private-library-btn{width:100%;text-align:center}
+  .music-stage{grid-template-columns:1fr;gap:10px}
+  .track{grid-template-columns:40px minmax(0,1fr) auto!important;gap:8px;padding:9px 9px}
+  .track-index{display:none}
+  .track-title{font-size:13px}
+  .track small{font-size:10px}
+  .play-track{width:36px;height:36px;font-size:16px}
+  .visualizer-card{min-height:170px;padding:11px}
+  #visualizer{height:115px}
+  .visualizer-title{font-size:12px}
+  .visualizer-status{font-size:10px}
+  .music-now-strip{display:grid!important;grid-template-columns:auto 1fr!important;gap:9px!important}
+  .music-now-side{grid-column:1/-1;text-align:left!important;font-size:9px!important}
+  #contacto .contact-grid{grid-template-columns:1fr!important}
+  #contacto .contact-card{min-height:0}
+  .share-web-box{width:100%!important}
+  .share-web-left{align-items:flex-start}
+  .share-web-btn{width:100%}
+  footer{padding-bottom:20px}
+
+  /* Presentación full-screen */
+  .presentation-stage{padding:66px 12px 55px}
+  .presentation-slide{width:94vw}
+  .ps-brand{font-size:clamp(46px,18vw,74px);letter-spacing:-2px}
+  .ps-tag{font-size:clamp(18px,6vw,25px)}
+  .ps-big{font-size:clamp(29px,9vw,42px)}
+  .ps-duo{gap:10px;margin-top:18px}
+  .ps-person{min-width:0;width:100%;padding:13px}
+  .presentation-close{right:10px;top:10px;width:41px;height:41px}
+  .presentation-progress{bottom:18px}
+
+  /* Barra del reproductor inferior */
+  .player-inner{grid-template-columns:minmax(0,1fr) auto;padding:8px 8px;gap:7px}
+  .now{grid-template-columns:44px minmax(0,1fr);gap:8px}
+  .now-cover{width:44px;height:44px}
+  .now-title{font-size:12px}
+  .now-sub{font-size:10px}
+  .controls{gap:4px}
+  .control{width:34px;height:34px;font-size:14px}
+  .control.main{width:41px;height:41px}
+  .progress-area{grid-column:1/-1;grid-template-columns:auto 1fr auto;gap:5px}
+  .progress-area .volume{display:none}
+  .time{font-size:9px}
+  .player-platforms{display:none}
+  .show-toggle{right:8px;bottom:112px;padding:8px 11px;font-size:11px}
+}
+
+/* Celulares muy angostos */
+@media (max-width:390px){
+  .brand{font-size:39px}
+  .chip{font-size:9.5px}
+  .quick-link{font-size:10px;padding:7px 7px}
+  .section{padding:16px 12px}
+  .dj-artist-name{font-size:26px}
+  .live-shot,.live-shot:first-child{height:185px}
+}
+
+/* Orientación horizontal en móviles */
+@media (max-height:520px) and (orientation:landscape) and (max-width:950px){
+  .hero{padding-top:28px;padding-bottom:24px}
+  .hero-actions{grid-template-columns:repeat(2,1fr)}
+  .presentation-stage{padding:50px 18px 28px}
+  .ps-brand{font-size:58px}
+  .ps-big{font-size:34px}
+  .ps-tag{font-size:20px}
+  .presentation-progress{bottom:10px}
+}
+
+/* Accesibilidad táctil */
+@media (hover:none) and (pointer:coarse){
+  .quick-link,.hero-cta,.btn,.direct-link,.private-library-btn,
+  .presentation-btn,.listen-now-btn,.control,.play-track{
+    min-height:44px;
+  }
+}
+
+</style>
+
+<style id="v47-cleanup">
+/* V47 · limpieza visual y funcional */
+.artist-identity{padding-top:27px;padding-bottom:27px}
+.artist-identity .identity-lead{max-width:760px;margin-bottom:16px}
+.artist-identity .identity-signature{margin-top:14px}
+.artist-identity .identity-actions{margin-top:18px}
+.direct-link.is-disabled,.player-platform.is-disabled{opacity:.46;filter:saturate(.35);pointer-events:none;cursor:default}
+#plataformas .platform-card.tidal,#plataformas .platform-card.deezer{opacity:.82}
+@media(max-width:760px){
+  .artist-identity{padding-top:22px;padding-bottom:22px}
+  .quick-nav-inner{gap:3px}
+}
+</style>
+
+<style id="v49-identity-nav-polish">
+/* V49 · vuelve la identidad de los dos DJs y alinea el menú principal */
+#identidad.artist-identity{
+  display:block !important;
+  margin-top:28px;
+  margin-bottom:24px;
+  padding:30px 34px;
+}
+#identidad .artist-duo{max-width:760px;margin:22px auto 0;}
+#identidad .identity-actions{display:none !important;}
+#identidad .identity-signature{margin-top:20px;}
+
+@media (min-width:861px){
+  .quick-nav-inner{
+    width:min(1120px,calc(100% - 32px));
+    justify-content:center;
+    gap:4px;
+    padding:8px 0;
+    overflow:visible;
+  }
+  .quick-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    min-height:38px;
+    padding:8px 11px;
+    line-height:1;
+  }
+  .quick-link .mi{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:15px;
+    min-width:15px;
+    margin-right:0;
+    line-height:1;
+  }
+}
+@media (max-width:860px){
+  .quick-nav-inner{justify-content:flex-start;}
+  #identidad.artist-identity{padding:24px 18px;margin-top:18px;}
+}
 </style>
 </head>
 <body>
 
+<style id="v48-real-cleanup">
+/* V48: limpieza visual fuerte. Se ocultan bloques repetidos sin romper su lógica interna. */
+#galeria, #plataformas { display:none !important; }
+#contacto .whatsapp-contact { display:none !important; }
+#contacto .contact-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+#contacto .share-web-box { margin-top:18px; }
+#live .live-grid { margin-top:18px; }
+@media (max-width:760px){ #contacto .contact-grid{grid-template-columns:1fr;} }
+</style>
 <div class="dj-now-intro" id="djNowIntro" aria-hidden="true">
   <div class="dj-now-panel">
     <div class="dj-now-kicker">NOW PLAYING</div>
@@ -2103,11 +2387,12 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
 <div class="presentation-slide active"><div class="ps-brand">Advanced<span>DJs</span></div><div class="ps-tag">“Donde la música y el estilo se encuentran”</div><div class="ps-small">Electronic Music · DJ Culture</div></div>
 <div class="presentation-slide"><div class="ps-big">Dos DJs.<br><span class="ps-gradient">Una misma energía.</span></div><div class="ps-duo"><div class="ps-person"><b>Victor Fernandez DJ</b><span>Indie Dance · Trance · House</span></div><div class="ps-person"><b>Cristian Paez DJ</b><span>Progressive House · Melodic House · Techno</span></div></div></div>
 <div class="presentation-slide"><div class="ps-big ps-gradient">SENTÍ LA MÚSICA.<br>VIVÍ LA EXPERIENCIA.</div><div class="ps-tag">DJ Sets · Sonido · Iluminación · Electronic Music</div></div>
-<div class="presentation-slide"><div class="ps-brand">Advanced<span>DJs</span></div><div class="ps-tag">Escuchanos. Conocenos. Viví nuestra música.</div><div class="ps-small">@advanceddjs · victoralejandrofernandez-sudo.github.io/advanceddjska5/</div></div>
+<div class="presentation-slide"><div class="ps-brand">Advanced<span>DJs</span></div><div class="ps-tag">Conocenos. Seguinos. Compartí la energía.</div><div class="ps-small">@advanceddjs · advanceddjs.com.ar</div></div>
+<div class="presentation-slide"><div class="ps-big ps-gradient">TODO ADVANCEDDJS<br>EN UN SOLO LUGAR.</div><div class="ps-sites"><div class="ps-site"><b>WEB OFICIAL</b><span>advanceddjs.com.ar</span></div><div class="ps-site"><b>MÚSICA</b><span>musica.advanceddjs.com.ar</span></div><div class="ps-site"><b>PEDIDOS</b><span>pedidos.advanceddjs.com.ar</span></div></div><div class="ps-follow">Escuchanos · Conocenos · Seguinos</div></div>
 </div>
   <div class="presentation-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="presentation-slide-counter" id="presentationSlideCounter">01 / 04</div>
-<div class="presentation-progress" id="presentationProgress"><span class="active"></span><span></span><span></span><span></span></div></div>
+  <div class="presentation-slide-counter" id="presentationSlideCounter">01 / 05</div>
+<div class="presentation-progress" id="presentationProgress"><span class="active"></span><span></span><span></span><span></span><span></span></div></div>
 
 <div class="music-side-fx" id="musicSideFx" aria-hidden="true">
   <div class="side-zone left">
@@ -2190,17 +2475,13 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   <div class="quick-nav-inner">
     <a class="quick-link" href="#inicio"><span class="mi">⌂</span>Inicio</a>
     <a class="quick-link" href="https://desktop-8lnh7cf.tail3f33ac.ts.net/" target="_blank" rel="noopener"><span class="mi">♫</span>Pedidos</a>
-    <a class="quick-link" href="#identidad"><span class="mi">✦</span>Identidad</a>
     <a class="quick-link" href="#experiencia"><span class="mi">◇</span>Experiencia</a>
     <a class="quick-link" href="#live"><span class="mi">●</span>En vivo</a>
     <a class="quick-link" href="#fechas"><span class="mi">◷</span>Fechas</a>
     <a class="quick-link" href="#quienes"><span class="mi">◉</span>Los DJs</a>
-    <a class="quick-link" href="#presentacion"><span class="mi">▤</span>Presentación</a>
     <a class="quick-link" href="#servicios"><span class="mi">✦</span>Servicios</a>
     <a class="quick-link" href="#musica"><span class="mi">♫</span>Música</a>
-    <a class="quick-link" href="#galeria"><span class="mi">▣</span>Fotos</a>
     <a class="quick-link" href="#contacto"><span class="mi">✉</span>Contacto</a>
-    <a class="quick-link" href="#plataformas"><span class="mi">▶</span>Plataformas</a>
   </div>
 </nav>
 
@@ -2211,10 +2492,6 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
     <div class="identity-kicker">AdvancedDJs · Electronic Music</div>
     <div class="identity-title">Dos DJs. <span>Una misma energía.</span></div>
     <p class="identity-lead">Música, imagen y atmósfera como una sola experiencia. AdvancedDJs nace de dos estilos que se encuentran en la cabina y construyen una identidad propia.</p>
-    <div class="artist-duo">
-      <div class="artist-profile"><b>Victor Fernandez DJ</b><span>Indie Dance · Trance · House</span></div>
-      <div class="artist-profile"><b>Cristian Paez DJ</b><span>Progressive House · Melodic House · Techno</span></div>
-    </div>
     <div class="identity-signature">DJ SETS · SONIDO · ILUMINACIÓN · ELECTRONIC MUSIC</div>
     <div class="identity-actions">
       <button class="presentation-btn" id="presentationBtn" type="button">PRESENTACIÓN ▶</button>
@@ -2248,8 +2525,8 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
 
   <section class="section live-section" id="live">
     <div class="live-head">
-      <h2>AdvancedDJs en vivo</h2>
-      <div class="live-copy">Cabina, música, luces y atmósfera. Una mirada breve a la identidad de AdvancedDJs cuando la experiencia sucede en vivo.</div>
+      <h2>AdvancedDJs en vivo · Fotos</h2>
+      <div class="live-copy">Cabina, música, luces y atmósfera. Nuestra selección visual de AdvancedDJs en vivo.</div>
     </div>
     <div class="live-grid">
       <div class="live-shot"><img src="https://victoralejandrofernandez-sudo.github.io/advanceddjska5/fotos/ChatGPT%20Image%2017%20ago%202026%2C%2006_15_02%20p.m.png" alt="AdvancedDJs en vivo 1" loading="lazy"><div class="live-caption">AdvancedDJs · Live</div></div>
@@ -2300,13 +2577,6 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
     </div>
 
     <div class="dj-duo-signature">DOS ESTILOS · UNA MISMA IDENTIDAD · ADVANCEDDJS</div>
-  </section>
-
-  <section class="section" id="presentacion">
-    <h2>Presentación</h2>
-    <p>“Soy DJ apasionado por crear experiencias únicas donde la música y el estilo se encuentran. Mi especialidad son los géneros <b>Electro, Dance y Pop</b>, que hacen vibrar cada fiesta y evento con la mejor energía.”</p>
-    <p>“Además, contamos con <b>iluminación profesional con cabezales móviles y luces LED</b>, junto a un <b>sistema de sonido de alta calidad YAMAHA</b>, garantizando un show completo, moderno y de alto nivel.”</p>
-    <p>“También realizamos eventos con <b>música popular y ritmos latinos</b> de diferentes géneros, ideales para ocasiones especiales, creando una experiencia única y emocionante para todos los invitados.”</p>
   </section>
 
   <section class="section" id="servicios">
@@ -2385,10 +2655,6 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
         <div><div class="contact-icon">☎</div><b>Otro teléfono</b><span class="muted" id="phone2Text">Contacto alternativo</span></div>
         <a class="direct-link" id="phone2Link" href="#">Llamar ↗</a>
       </div>
-      <div class="contact-card" id="emailCard">
-        <div><div class="contact-icon">✉️</div><b>Email</b><span class="muted" id="emailText">Consultas por correo</span></div>
-        <a class="direct-link" id="emailLink" href="#">Enviar correo ↗</a>
-      </div>
       <div class="contact-card">
         <div><div class="contact-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="igG" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ffb000"/><stop offset=".45" stop-color="#ff3366"/><stop offset="1" stop-color="#7a3cff"/></linearGradient></defs><rect x="3" y="3" width="26" height="26" rx="7" fill="url(#igG)"/><circle cx="16" cy="16" r="6" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="23.4" cy="8.7" r="1.5" fill="#fff"/></svg></div><b>Instagram</b><span class="muted" id="igText">Seguinos y mirá nuestros eventos</span></div>
         <a class="direct-link" id="igLink" href="https://www.instagram.com/advanceddjs/" target="_blank" rel="noopener">Abrir Instagram ↗</a>
@@ -2420,7 +2686,7 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
           <span>Enviá esta web por WhatsApp</span>
         </div>
       </div>
-      <a class="share-web-btn" href="https://wa.me/?text=%F0%9F%8E%A7%20AdvancedDJs%20%E2%80%94%20Donde%20la%20m%C3%BAsica%20y%20el%20estilo%20se%20encuentran.%0AConoc%C3%A9%20nuestra%20m%C3%BAsica%2C%20eventos%20y%20propuesta%20DJ%3A%0Ahttps%3A%2F%2Fvictoralejandrofernandez-sudo.github.io%2Fadvanceddjska5%2F" target="_blank" rel="noopener">Compartir ↗</a>
+      <a class="share-web-btn" href="https://wa.me/?text=%F0%9F%8E%A7%20AdvancedDJs%20%E2%80%94%20Donde%20la%20m%C3%BAsica%20y%20el%20estilo%20se%20encuentran.%0AConoc%C3%A9%20nuestra%20m%C3%BAsica%2C%20eventos%20y%20propuesta%20DJ%3A%0Ahttps%3A%2F%2Fadvanceddjs.com.ar%2F" target="_blank" rel="noopener">Compartir ↗</a>
     </div>
   </section>
 
@@ -2429,53 +2695,13 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
     <p class="muted" style="margin-top:-10px;margin-bottom:18px">Accesos directos a nuestras plataformas de música.</p>
     <div class="platform-grid">
       <div class="platform-card youtube"><div><div class="platform-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="6" width="28" height="20" rx="6" fill="#FF0033"/><path d="M13 11.5 22 16l-9 4.5v-9Z" fill="#fff"/></svg></div><b>YouTube</b><span class="muted">Videos, sets y contenido</span></div><a class="direct-link" id="youtubeLink" href="https://www.youtube.com/watch?v=w1zvVhUSmEk" target="_blank" rel="noopener">Abrir YouTube ↗</a></div>
-      <div class="platform-card tidal"><div><div class="platform-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><path d="m8 7 4 4-4 4-4-4 4-4Zm8 0 4 4-4 4-4-4 4-4Zm8 0 4 4-4 4-4-4 4-4Zm-8 8 4 4-4 4-4-4 4-4Zm0 8 4 4-4 4-4-4 4-4Z"/></g></svg></div><b>TIDAL</b><span class="muted">Música en alta calidad</span></div><a class="direct-link" id="tidalLink" href="https://tidal.com/" target="_blank" rel="noopener">Abrir TIDAL ↗</a></div>
-      <div class="platform-card deezer"><div><div class="platform-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="3" y="18" width="5" height="8" rx="1"/><rect x="9" y="14" width="5" height="12" rx="1"/><rect x="15" y="10" width="5" height="16" rx="1"/><rect x="21" y="6" width="5" height="20" rx="1"/></g></svg></div><b>Deezer</b><span class="muted">Música y playlists</span></div><a class="direct-link" id="deezerLink" href="https://www.deezer.com/" target="_blank" rel="noopener">Abrir Deezer ↗</a></div>
+      <div class="platform-card tidal"><div><div class="platform-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><path d="m8 7 4 4-4 4-4-4 4-4Zm8 0 4 4-4 4-4-4 4-4Zm8 0 4 4-4 4-4-4 4-4Zm-8 8 4 4-4 4-4-4 4-4Zm0 8 4 4-4 4-4-4 4-4Z"/></g></svg></div><b>TIDAL</b><span class="muted">Música en alta calidad</span></div><a class="direct-link is-disabled" id="tidalLink" href="#" aria-disabled="true">Próximamente</a></div>
+      <div class="platform-card deezer"><div><div class="platform-icon"><svg class="brand-svg" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><rect x="3" y="18" width="5" height="8" rx="1"/><rect x="9" y="14" width="5" height="12" rx="1"/><rect x="15" y="10" width="5" height="16" rx="1"/><rect x="21" y="6" width="5" height="20" rx="1"/></g></svg></div><b>Deezer</b><span class="muted">Música y playlists</span></div><a class="direct-link is-disabled" id="deezerLink" href="#" aria-disabled="true">Próximamente</a></div>
     </div>
   </section>
 
 
-  <section class="section" id="admin">
-    <h2>ADMIN DJ</h2>
-    <p class="muted" style="margin-top:-8px">
-      Herramientas de edición local. Los cambios de fotos, música y contactos se guardan en este navegador;
-      para que todos los visitantes vean el mismo contenido necesitaremos publicar los archivos o conectar almacenamiento online.
-    </p>
-    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px;">
-      <div class="person">
-        <h3>📸 Subir fotos</h3>
-        <p class="muted">Agregá nuevas imágenes a la galería desde tu PC.</p>
-        <label class="file-label" for="adminPhotoInput">＋ Elegir fotos</label>
-        <input id="adminPhotoInput" type="file" accept="image/*" multiple>
-      </div>
-      <div class="person">
-        <h3>🎵 Subir música</h3>
-        <p class="muted">Agregá nuevos temas o sets al reproductor.</p>
-        <label class="file-label" for="adminAudioInput">＋ Elegir música</label>
-        <input id="adminAudioInput" type="file" accept="audio/*" multiple>
-      </div>
-    </div>
 
-    <div class="person" style="margin-top:16px">
-      <h3>🔗 Contactos y plataformas</h3>
-      <p class="muted">Pegá tus enlaces reales. Quedan guardados en este navegador.</p>
-      <div class="admin-links">
-        <div class="admin-field"><label>Celular / WhatsApp principal (con código de país)</label><input id="cfgWhatsapp" placeholder="Ej: 549358..." inputmode="numeric"></div>
-        <div class="admin-field"><label>Otro teléfono de contacto</label><input id="cfgPhone2" placeholder="Ej: +54 358 ..." inputmode="tel"></div>
-        <div class="admin-field"><label>Email</label><input id="cfgEmail" placeholder="tuemail@dominio.com" type="email"></div>
-        <div class="admin-field"><label>Instagram</label><input id="cfgInstagram" placeholder="https://instagram.com/..." type="url" value="https://www.instagram.com/advanceddjs/"></div>
-        <div class="admin-field"><label>YouTube</label><input id="cfgYoutube" placeholder="https://youtube.com/@..." type="url" value="https://www.youtube.com/watch?v=w1zvVhUSmEk"></div>
-        <div class="admin-field"><label>TIDAL</label><input id="cfgTidal" placeholder="https://tidal.com/..." type="url"></div>
-        <div class="admin-field"><label>Deezer</label><input id="cfgDeezer" placeholder="https://deezer.com/..." type="url"></div>
-      </div>
-      <button class="btn save-links" id="saveLinks" type="button">Guardar contactos y enlaces</button>
-    </div>
-
-    <div style="margin-top:16px;padding:14px 16px;border:1px solid #1b425e;border-radius:12px;background:#091421;">
-      <b style="color:var(--cyan)">Estado:</b>
-      <span class="muted"> edición local activa. Esta zona queda oculta en la vista pública y se abre con el botón ⚙.</span>
-    </div>
-  </section>
 
   <footer>AdvancedDJs · Victor Fernandez DJ</footer>
 </main>
@@ -2507,13 +2733,12 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   <div class="player-platforms" aria-label="Plataformas de AdvancedDJs">
     <span class="player-platform-label">Escuchanos en</span>
     <a class="player-platform" id="playerYoutubeLink" href="https://www.youtube.com/watch?v=w1zvVhUSmEk" target="_blank" rel="noopener"><span class="picon">▶</span>YouTube</a>
-    <a class="player-platform" id="playerTidalLink" href="https://tidal.com/" target="_blank" rel="noopener"><span class="picon">≋</span>TIDAL</a>
-    <a class="player-platform" id="playerDeezerLink" href="https://www.deezer.com/" target="_blank" rel="noopener"><span class="picon">▥</span>Deezer</a>
+    <a class="player-platform is-disabled" id="playerTidalLink" href="#" aria-disabled="true"><span class="picon">≋</span>TIDAL</a>
+    <a class="player-platform is-disabled" id="playerDeezerLink" href="#" aria-disabled="true"><span class="picon">▥</span>Deezer</a>
   </div>
 </div>
 
 <button class="show-toggle" id="showToggle" type="button">✦ SHOW</button>
-<button class="admin-access" id="adminAccess" type="button" title="Administración" aria-label="Abrir administración"><span class="admin-gear">⚙</span><span class="admin-text">ADMIN</span></button>
 
 
 <div class="lightbox" id="galleryLightbox" aria-hidden="true" role="dialog" aria-label="Visor de galería">
@@ -3003,20 +3228,27 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   const adminPhotoInput = document.getElementById('adminPhotoInput');
   const adminAudioInput = document.getElementById('adminAudioInput');
 
-  adminPhotoInput.addEventListener('change', async()=>{
-    const files=[...adminPhotoInput.files];
-    adminPhotoInput.value='';
-    if(files.length) await savePhotoFiles(files);
-  });
+  // V52: el panel ADMIN ya no existe en la versión pública.
+  // Estos listeners solo se activan si los controles están presentes, evitando
+  // que un elemento ADMIN inexistente detenga la carga de las canciones públicas.
+  if (adminPhotoInput) {
+    adminPhotoInput.addEventListener('change', async()=>{
+      const files=[...adminPhotoInput.files];
+      adminPhotoInput.value='';
+      if(files.length) await savePhotoFiles(files);
+    });
+  }
 
-  adminAudioInput.addEventListener('change', async () => {
-    const files=[...adminAudioInput.files];
-    adminAudioInput.value = '';
-    if(!files.length) return;
-    await addAudioFiles(files);
-    if (current === -1 && tracks.length) loadTrack(0,false);
-    else renderTracks();
-  });
+  if (adminAudioInput) {
+    adminAudioInput.addEventListener('change', async () => {
+      const files=[...adminAudioInput.files];
+      adminAudioInput.value = '';
+      if(!files.length) return;
+      await addAudioFiles(files);
+      if (current === -1 && tracks.length) loadTrack(0,false);
+      else renderTracks();
+    });
+  }
 
   clearTracks.addEventListener('click', async () => {
     await dbClear('tracks');
@@ -3062,87 +3294,19 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   audio.addEventListener('ended', () => document.body.classList.remove('music-playing'));
 
   // Aprovecha el analizador existente, si la versión ya lo creó, para un pulso tenue del logo.
-  // V11: administración visualmente separada de la vista pública.
-  // Nota: al ser una web estática, esto no es un sistema de seguridad/autenticación.
-  const adminAccess = document.getElementById('adminAccess');
-  adminAccess.addEventListener('click', () => {
-    document.body.classList.toggle('admin-mode');
-    const active=document.body.classList.contains('admin-mode');
-    adminAccess.classList.toggle('active',active);
-    adminAccess.setAttribute('aria-label', active ? 'Cerrar administración' : 'Abrir administración');
-    adminAccess.title=active ? 'Cerrar administración' : 'Administración';
-    const adminText=adminAccess.querySelector('.admin-text');
-    if(adminText) adminText.textContent=active ? 'CERRAR' : 'ADMIN';
-    if(active){ document.getElementById('admin').scrollIntoView({behavior:'smooth',block:'start'}); }
-  });
-
-  // V11: contactos persistentes + accesos directos definidos
-  const cfgWhatsapp = document.getElementById('cfgWhatsapp');
-  const cfgEmail = document.getElementById('cfgEmail');
-  const cfgPhone2 = document.getElementById('cfgPhone2');
-  const cfgInstagram = document.getElementById('cfgInstagram');
-  const cfgYoutube = document.getElementById('cfgYoutube');
-  const cfgTidal = document.getElementById('cfgTidal');
-  const cfgDeezer = document.getElementById('cfgDeezer');
-  const saveLinks = document.getElementById('saveLinks');
-  const LINKS_KEY = 'advanceddjs_links_v10';
-  const OLD_LINKS_KEY = 'advanceddjs_links_v9';
-
-  function safeUrl(value, fallback){
-    const v=(value||'').trim();
-    if(!v) return fallback;
-    return /^https?:\/\//i.test(v) ? v : 'https://' + v;
-  }
-  function applyLinks(data={}){
-    const wa=(data.whatsapp||'').replace(/\D/g,'');
-    const email=(data.email||'').trim();
-    const ig=(data.instagram||'https://www.instagram.com/advanceddjs/').trim();
-    const phone2=(data.phone2||'').trim();
-    const waCard=document.getElementById('waCard');
-    const emailCard=document.getElementById('emailCard');
-    document.getElementById('waLink').href=wa ? 'https://wa.me/'+wa : '#';
-    document.getElementById('emailLink').href=email ? 'mailto:'+email : '#';
-    waCard.classList.toggle('unconfigured',!wa);
-    emailCard.classList.toggle('unconfigured',!email);
-    document.getElementById('igLink').href=ig ? safeUrl(ig,'#') : '#';
-    const yt=safeUrl(data.youtube,'https://www.youtube.com/watch?v=w1zvVhUSmEk');
-    const td=safeUrl(data.tidal,'https://tidal.com/');
-    const dz=safeUrl(data.deezer,'https://www.deezer.com/');
-    document.getElementById('youtubeLink').href=yt;
-    document.getElementById('tidalLink').href=td;
-    document.getElementById('deezerLink').href=dz;
-    document.getElementById('playerYoutubeLink').href=yt;
-    document.getElementById('playerTidalLink').href=td;
-    document.getElementById('playerDeezerLink').href=dz;
-    document.getElementById('waText').textContent=wa ? '+'+wa : 'Contacto directo';
-    document.getElementById('emailText').textContent=email || 'Consultas por correo';
-    document.getElementById('igText').textContent=ig ? '@advanceddjs' : 'Seguinos y mirá nuestros eventos';
-    const phone2Card=document.getElementById('phone2Card');
-    if(phone2){
-      document.getElementById('phone2Text').textContent=phone2;
-      document.getElementById('phone2Link').href='tel:'+phone2.replace(/[^+\d]/g,'');
-      phone2Card.classList.add('visible');
-    }else{
-      phone2Card.classList.remove('visible');
-      document.getElementById('phone2Link').href='#';
-    }
-    cfgWhatsapp.value=data.whatsapp||''; cfgPhone2.value=data.phone2||''; cfgEmail.value=data.email||''; cfgInstagram.value=data.instagram||'https://www.instagram.com/advanceddjs/';
-    cfgYoutube.value=data.youtube||'https://www.youtube.com/watch?v=w1zvVhUSmEk'; cfgTidal.value=data.tidal||''; cfgDeezer.value=data.deezer||'';
-  }
-  let savedLinks={};
-  try{ savedLinks=JSON.parse(localStorage.getItem(LINKS_KEY)||localStorage.getItem(OLD_LINKS_KEY)||'{}'); }catch(e){}
-  if(!savedLinks.youtube || savedLinks.youtube === 'https://www.youtube.com/' || savedLinks.youtube === 'https://youtube.com/') savedLinks.youtube='https://www.youtube.com/watch?v=w1zvVhUSmEk';
-  if(!savedLinks.instagram) savedLinks.instagram='https://www.instagram.com/advanceddjs/';
-  applyLinks(savedLinks);
-  saveLinks.addEventListener('click',()=>{
-    const data={whatsapp:cfgWhatsapp.value.trim(),phone2:cfgPhone2.value.trim(),email:cfgEmail.value.trim(),instagram:cfgInstagram.value.trim(),youtube:cfgYoutube.value.trim(),tidal:cfgTidal.value.trim(),deezer:cfgDeezer.value.trim()};
-    localStorage.setItem(LINKS_KEY,JSON.stringify(data));
-    applyLinks(data);
-    const old=saveLinks.textContent; saveLinks.textContent='✓ Guardado';
-    setTimeout(()=>saveLinks.textContent=old,1400);
-  });
-
-
+  // V51: versión pública — sin panel ADMIN ni credenciales en el HTML.
+  // Los contactos públicos quedan definidos directamente y no dependen del almacenamiento local.
+  const waPublic='543584871451';
+  const waLinkPublic=document.getElementById('waLink');
+  const waTextPublic=document.getElementById('waText');
+  if(waLinkPublic) waLinkPublic.href='https://wa.me/'+waPublic+'?text=Hola%20AdvancedDJs%2C%20quisiera%20consultar%20por%20un%20evento.';
+  if(waTextPublic) waTextPublic.textContent='+54 358 487-1451';
+  const igPublic=document.getElementById('igLink');
+  if(igPublic) igPublic.href='https://www.instagram.com/advanceddjs/';
+  const igTextPublic=document.getElementById('igText');
+  if(igTextPublic) igTextPublic.textContent='@advanceddjs';
+  const phone2CardPublic=document.getElementById('phone2Card');
+  if(phone2CardPublic) phone2CardPublic.style.display='none';
 
   // V12: mostrar solo 3 canciones y desplegar el resto
   const tracksExpand = document.getElementById('tracksExpand');
@@ -3523,7 +3687,7 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
     const data={
       title:'AdvancedDJs',
       text:'AdvancedDJs · Donde la música y el estilo se encuentran',
-      url:'https://victoralejandrofernandez-sudo.github.io/advanceddjska5/'
+      url:'https://advanceddjs.com.ar/'
     };
     try{
       if(navigator.share){
@@ -3612,13 +3776,18 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   /* Al entrar a Presentación: si ya hay música, continúa.
      Si no hay música, intenta iniciar el tema seleccionado actual.
      Si el navegador bloquea autoplay, el control ▶ queda disponible. */
+  let presentationWasOpen=modal.classList.contains('open');
   const watch=new MutationObserver(()=>{
-    if(modal.classList.contains('open')){
+    const isOpen=modal.classList.contains('open');
+    /* Solo intentamos iniciar audio cuando la presentación PASA de cerrada a abierta.
+       Cambios internos como music-active ya no vuelven a arrancar la música después de Pausa. */
+    if(isOpen && !presentationWasOpen){
       sync();
       if(audio.paused && audio.src){
         audio.play().catch(()=>sync());
       }
     }
+    presentationWasOpen=isOpen;
   });
   watch.observe(modal,{attributes:true,attributeFilter:['class']});
 
