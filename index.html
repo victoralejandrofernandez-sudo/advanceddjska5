@@ -2334,6 +2334,44 @@ img,video,canvas{max-width:100%}
   #identidad.artist-identity{padding:24px 18px;margin-top:18px;}
 }
 </style>
+<style id="v53-web-informativo">
+/* V53 · informativo continuo AdvancedDJs, entre portada y navegación */
+.adjs-news{
+  position:relative;z-index:12;width:100%;height:50px;min-height:50px;overflow:hidden;
+  border-top:1px solid rgba(159,100,255,.48);border-bottom:1px solid rgba(41,211,234,.42);
+  background:linear-gradient(90deg,#160d25 0%,#091426 48%,#06242d 100%);
+  box-shadow:0 9px 28px rgba(0,0,0,.38),inset 0 0 26px rgba(83,87,220,.08);
+}
+.adjs-news::before{
+  content:"INFORMATIVO";position:absolute;z-index:4;left:0;top:0;bottom:0;
+  display:flex;align-items:center;padding:0 18px;color:#fff;font-size:11px;font-weight:900;
+  letter-spacing:.13em;background:linear-gradient(105deg,#a93bd3,#536cf4 54%,#22c5d7);
+  box-shadow:12px 0 24px rgba(2,7,15,.94);text-shadow:0 1px 5px #28356b;
+}
+.adjs-news-window{height:100%;margin-left:129px;display:flex;align-items:center;overflow:hidden}
+.adjs-news-track{display:flex;align-items:center;width:max-content;white-space:nowrap;will-change:transform;animation:adjsNewsMove 68s linear infinite}
+.adjs-news-group{display:flex;align-items:center;flex:none}
+.adjs-news-item{display:inline-flex;align-items:center;color:#f2eef8;font-size:14px;font-weight:750;line-height:1}
+.adjs-news-sep{display:inline-block;margin:0 26px;color:#bd78ff;font-size:13px;text-shadow:0 0 11px #8c5dff}
+.adjs-news-link{
+  color:#8feaf6;text-decoration:underline;text-decoration-color:rgba(143,234,246,.48);
+  text-underline-offset:3px;border:1px solid rgba(77,202,224,.28);border-radius:999px;
+  padding:6px 10px;background:rgba(20,126,156,.12);cursor:pointer;
+}
+.adjs-news-link:hover,.adjs-news-link:focus{color:#fff;border-color:#62e7f4;background:rgba(37,191,214,.24);box-shadow:0 0 13px rgba(66,219,238,.25);outline:none}
+.adjs-news:hover .adjs-news-track,.adjs-news:focus-within .adjs-news-track{animation-play-state:paused}
+@keyframes adjsNewsMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* Recupera el espacio de la cinta sin achicar contenidos: solo compacta la portada. */
+@media(min-width:1400px){.hero{min-height:545px!important;padding-top:55px!important;padding-bottom:46px!important}}
+@media(min-width:901px) and (max-width:1399px){.hero{min-height:500px!important;padding-top:48px!important;padding-bottom:40px!important}}
+@media(max-width:620px){
+  .adjs-news{height:42px;min-height:42px}.adjs-news::before{content:"INFO";padding:0 10px;font-size:9px;letter-spacing:.10em}
+  .adjs-news-window{margin-left:51px}.adjs-news-item{font-size:12px}.adjs-news-sep{margin:0 18px;font-size:11px}
+  .adjs-news-link{padding:5px 8px}.adjs-news-track{animation-duration:60s}
+}
+@media(max-height:520px) and (orientation:landscape) and (max-width:950px){.adjs-news{height:40px;min-height:40px}}
+@media(prefers-reduced-motion:reduce){.adjs-news-track{animation-duration:110s}}
+</style>
 </head>
 <body>
 
@@ -2470,6 +2508,33 @@ img,video,canvas{max-width:100%}
 
   </div>
 </header>
+
+<aside class="adjs-news" aria-label="Informativo y accesos directos de AdvancedDJs">
+  <div class="adjs-news-window">
+    <div class="adjs-news-track">
+      <div class="adjs-news-group">
+        <span class="adjs-news-item">Victor Fernández DJ · Electro · Dance · Pop</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item">Cristian Páez DJ · Electro · Dance · House</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item">Próximamente · AdvancedDJs en vivo desde Río Cuarto</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item">AdvancedDJs · Música electrónica todos los días, las 24 horas</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Conocenos · advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://musica.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Escuchanos · musica.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://radio.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Radio · radio.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://pedidos.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Pedidos · pedidos.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+      </div>
+      <div class="adjs-news-group">
+        <span class="adjs-news-item">Victor Fernández DJ · Electro · Dance · Pop</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item">Cristian Páez DJ · Electro · Dance · House</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item">Próximamente · AdvancedDJs en vivo desde Río Cuarto</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item">AdvancedDJs · Música electrónica todos los días, las 24 horas</span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Conocenos · advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://musica.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Escuchanos · musica.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://radio.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Radio · radio.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+        <span class="adjs-news-item"><a class="adjs-news-link" href="https://pedidos.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Pedidos · pedidos.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
+      </div>
+    </div>
+  </div>
+</aside>
 
 <nav class="quick-nav" aria-label="Menú principal">
   <div class="quick-nav-inner">
@@ -2954,8 +3019,7 @@ img,video,canvas{max-width:100%}
     {name:'Nothing Like the Rain', artist:'2 Unlimited', url:'04-2-unlimited-nothing-like-the-rain.mp3', fallbackUrl:'music/04-2-unlimited-nothing-like-the-rain.mp3', coverUrl:null, dbId:null, public:true},
     {name:'Jump In', artist:'Sevren', url:'05-sevren-jump-in.mp3', coverUrl:null, dbId:null, public:true},
     {name:'Waiting', artist:'Dash Berlin · Emma Hewitt', url:'06-dash-berlin-waiting.mp3', coverUrl:null, dbId:null, public:true},
-    {name:'Everybody', artist:'DJ Bobo', url:'07-dj-bobo-everybody.mp3', coverUrl:null, dbId:null, public:true},
-    {name:'Mana - Lluvia Al Corazon', artist:'Mana', url:'music/1787986251347-b39b69a1.mp3', coverUrl:null, dbId:null, public:true}
+    {name:'Everybody', artist:'DJ Bobo', url:'07-dj-bobo-everybody.mp3', coverUrl:null, dbId:null, public:true}
   ];
   let current = -1;
 
