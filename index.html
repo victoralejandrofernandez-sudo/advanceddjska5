@@ -3033,8 +3033,8 @@ img,video,canvas{max-width:100%}
       const energy = Math.max(bassEnergy*.78,avgEnergy*.58);
       document.documentElement.style.setProperty('--music-energy',energy.toFixed(3));
       document.documentElement.style.setProperty('--music-energy-soft',avgEnergy.toFixed(3));
-      const gainDbForMeter = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
-      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(.001,avgEnergy)) + Math.min(0,gainDbForMeter)));
+      // El analyser está conectado DESPUÉS de gainNode: este valor ya incluye la ganancia real.
+      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(.001,avgEnergy))));
       const mixPct=Math.max(0,Math.min(100,(mixDb+60)/60*100));
       const mixDbEl=document.getElementById('mixRealDb');
       const mixFill=document.getElementById('mixRealFill');
@@ -3060,13 +3060,16 @@ img,video,canvas{max-width:100%}
         const nyquist = audioCtx.sampleRate / 2;
         const f1 = 60 * Math.pow(12000/60, i/bars);
         const f2 = 60 * Math.pow(12000/60, (i+1)/bars);
-        const a = Math.max(0, Math.min(freqData.length-1, Math.floor(f1/nyquist*freqData.length)));
-        const b = Math.max(a, Math.min(freqData.length-1, Math.ceil(f2/nyquist*freqData.length)));
+        let a = Math.max(0, Math.min(freqData.length-1, Math.floor(f1/nyquist*freqData.length)));
+        let b = Math.max(a, Math.min(freqData.length-1, Math.ceil(f2/nyquist*freqData.length)));
+        // En los agudos ampliamos levemente la ventana para que 8–12 kHz responda
+        // a la señal real y no quede visualmente muerto por la resolución del FFT.
+        if(i >= bars-6){ a=Math.max(0,a-1); b=Math.min(freqData.length-1,b+2); }
         let sum=0, peak=0, n=0;
         for(let k=a;k<=b;k++){ const v=freqData[k]; sum+=v; peak=Math.max(peak,v); n++; }
-        raw = n ? (sum/n)*0.72 + peak*0.28 : 0;
+        raw = n ? (sum/n)*0.60 + peak*0.40 : 0;
       }
-      const level = audio.paused ? Math.max(2, Math.sin(Date.now()/500+i*.8)*2+3) : Math.max(3,(raw/255)*(h-18));
+      const level = audio.paused ? Math.max(2, Math.sin(Date.now()/500+i*.8)*2+3) : Math.max(2,(raw/255)*(h-18));
       const x=i*(bw+gap), y=h-level;
       vctx.fillStyle=grad;
       vctx.beginPath();
@@ -3282,18 +3285,23 @@ img,video,canvas{max-width:100%}
 
   function applyOutputLevel(){
     const db = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
-    const gainLinear = Math.pow(10, Math.min(0, db) / 20); // reducción real y segura
-    const effective = Math.max(0, Math.min(1, userVolume * gainLinear));
-    audio.volume = effective;
-
-    // Si WebAudio está activo, dejamos la parte positiva en el GainNode.
-    // La reducción negativa ya está garantizada por audio.volume.
-    if(typeof gainNode!=='undefined' && gainNode && typeof audioCtx!=='undefined' && audioCtx){
-      const positiveLinear = db > 0 ? Math.pow(10, db/20) : 1;
+    // Volumen general y ganancia son controles independientes.
+    audio.volume = Math.max(0, Math.min(1, userVolume));
+    if(gainNode && audioCtx){
+      const linear = Math.pow(10, db/20);
       gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-      gainNode.gain.setTargetAtTime(positiveLinear, audioCtx.currentTime, .015);
+      gainNode.gain.setTargetAtTime(linear, audioCtx.currentTime, .015);
     }
   }
+
+  // Puente público para que el control de GANANCIA (que está en un bloque posterior)
+  // modifique el audio inmediatamente sin depender del alcance de esta función.
+  window.AdvancedDJsApplyGain = function(db){
+    const safeDb = Math.max(-12, Math.min(6, Number(db) || 0));
+    localStorage.setItem('advanceddjs_gain_db', String(safeDb));
+    if(!audioCtx){ try{ ensureVisualizer(); }catch(e){} }
+    applyOutputLevel();
+  };
 
   volume.addEventListener('input', () => {
     userVolume = Number(volume.value || 0);
@@ -3904,21 +3912,9 @@ img,video,canvas{max-width:100%}
     if(value) value.textContent=(db>0?'+':'')+db.toFixed(1)+' dB';
     localStorage.setItem('advanceddjs_gain_db',String(db));
 
-    // La reducción negativa se aplica directamente al elemento de audio.
-    // Así funciona siempre, independientemente del navegador/WebAudio.
-    if(typeof applyOutputLevel==='function'){
-      applyOutputLevel();
-    }
-
-    // Para ganancia positiva mantenemos WebAudio, si está disponible.
-    if(db > 0 && typeof ensureVisualizer==='function' && (!gainNode || !audioCtx)){
-      try{ ensureVisualizer(); }catch(e){}
-    }
-    if(db > 0 && typeof gainNode!=='undefined' && gainNode && typeof audioCtx!=='undefined' && audioCtx){
-      if(audioCtx.state==='suspended') audioCtx.resume().catch(()=>{});
-      const linear=Math.pow(10,db/20);
-      gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-      gainNode.gain.setTargetAtTime(linear,audioCtx.currentTime,.01);
+    // Aplica la ganancia REAL al GainNode del reproductor en el mismo instante.
+    if(typeof window.AdvancedDJsApplyGain==='function'){
+      window.AdvancedDJsApplyGain(db);
     }
   }
   slider?.addEventListener('input',applyGain);
