@@ -2974,7 +2974,7 @@ img,video,canvas{max-width:100%}
   const visualizer = document.getElementById('visualizer');
   const visualizerStatus = document.getElementById('visualizerStatus');
   const vctx = visualizer.getContext('2d');
-  let audioCtx, analyser, sourceNode, gainNode, freqData, animationId;
+  let audioCtx, analyser, sourceNode, gainNode, freqData, timeData, animationId;
 
   let tracks = [
     {name:'Machine', artist:'Joris Voorn · Roddy Lima · Taylr Renee', url:'02-joris-voorn-machine.mp3', fallbackUrl:'music/02-joris-voorn-machine.mp3', coverUrl:null, dbId:null, public:true},
@@ -3000,6 +3000,7 @@ img,video,canvas{max-width:100%}
       const savedGain = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
       gainNode.gain.value = Math.pow(10, savedGain/20);
       freqData = new Uint8Array(analyser.frequencyBinCount);
+      timeData = new Float32Array(analyser.fftSize);
     }
     if (audioCtx.state === 'suspended') audioCtx.resume();
     if (!animationId) drawVisualizer();
@@ -3020,7 +3021,10 @@ img,video,canvas{max-width:100%}
     grad.addColorStop(.55,'rgba(26,124,255,.72)');
     grad.addColorStop(1,'rgba(8,231,231,1)');
     const bars = 24, gap = 4, bw = Math.max(3,(w-gap*(bars-1))/bars);
-    if (analyser) analyser.getByteFrequencyData(freqData);
+    if (analyser){
+      analyser.getByteFrequencyData(freqData);
+      if(timeData) analyser.getFloatTimeDomainData(timeData);
+    }
     if (analyser && freqData && !audio.paused){
       const bassCount = Math.max(3, Math.floor(freqData.length * .16));
       let bass = 0, all = 0;
@@ -3033,8 +3037,18 @@ img,video,canvas{max-width:100%}
       const energy = Math.max(bassEnergy*.78,avgEnergy*.58);
       document.documentElement.style.setProperty('--music-energy',energy.toFixed(3));
       document.documentElement.style.setProperty('--music-energy-soft',avgEnergy.toFixed(3));
-      // El analyser está conectado DESPUÉS de gainNode: este valor ya incluye la ganancia real.
-      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(.001,avgEnergy))));
+      // NIVEL REAL: RMS de la señal temporal DESPUÉS de gainNode.
+      // A diferencia del promedio del espectro, esto sí refleja la ganancia aplicada.
+      let rms = 0;
+      if(timeData && timeData.length){
+        let sumSquares = 0;
+        for(let i=0;i<timeData.length;i++){
+          const s = timeData[i];
+          sumSquares += s*s;
+        }
+        rms = Math.sqrt(sumSquares / timeData.length);
+      }
+      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(0.000001,rms))));
       const mixPct=Math.max(0,Math.min(100,(mixDb+60)/60*100));
       const mixDbEl=document.getElementById('mixRealDb');
       const mixFill=document.getElementById('mixRealFill');
