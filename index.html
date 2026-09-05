@@ -2328,6 +2328,7 @@ img,video,canvas{max-width:100%}
 
 
 
+<script>window.ADVANCEDDJS_DATES=[{"date":"","title":"AdvancedDJs Live","place":""}];</script>
 </head>
 <body>
 
@@ -2650,7 +2651,7 @@ img,video,canvas{max-width:100%}
           <div class="mix-real-scale"><span>−60</span><span>−30</span><span>−18</span><span>−12</span><span>−6</span><span>0 dB</span></div>
           <div class="gain-control">
             <div class="gain-head">
-              <span>GANANCIA REAL</span>
+              <span>GANANCIA</span>
               <strong id="gainValue">0.0 dB</strong>
             </div>
             <input id="gainControl" type="range" min="-12" max="6" step="0.5" value="0" aria-label="Ganancia de audio">
@@ -2974,7 +2975,7 @@ img,video,canvas{max-width:100%}
   const visualizer = document.getElementById('visualizer');
   const visualizerStatus = document.getElementById('visualizerStatus');
   const vctx = visualizer.getContext('2d');
-  let audioCtx, analyser, sourceNode, gainNode, freqData, timeData, animationId;
+  let audioCtx, analyser, sourceNode, gainNode, freqData, animationId;
 
   let tracks = [
     {name:'Machine', artist:'Joris Voorn · Roddy Lima · Taylr Renee', url:'02-joris-voorn-machine.mp3', fallbackUrl:'music/02-joris-voorn-machine.mp3', coverUrl:null, dbId:null, public:true},
@@ -3000,7 +3001,6 @@ img,video,canvas{max-width:100%}
       const savedGain = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
       gainNode.gain.value = Math.pow(10, savedGain/20);
       freqData = new Uint8Array(analyser.frequencyBinCount);
-      timeData = new Float32Array(analyser.fftSize);
     }
     if (audioCtx.state === 'suspended') audioCtx.resume();
     if (!animationId) drawVisualizer();
@@ -3021,10 +3021,7 @@ img,video,canvas{max-width:100%}
     grad.addColorStop(.55,'rgba(26,124,255,.72)');
     grad.addColorStop(1,'rgba(8,231,231,1)');
     const bars = 24, gap = 4, bw = Math.max(3,(w-gap*(bars-1))/bars);
-    if (analyser){
-      analyser.getByteFrequencyData(freqData);
-      if(timeData) analyser.getFloatTimeDomainData(timeData);
-    }
+    if (analyser) analyser.getByteFrequencyData(freqData);
     if (analyser && freqData && !audio.paused){
       const bassCount = Math.max(3, Math.floor(freqData.length * .16));
       let bass = 0, all = 0;
@@ -3037,18 +3034,7 @@ img,video,canvas{max-width:100%}
       const energy = Math.max(bassEnergy*.78,avgEnergy*.58);
       document.documentElement.style.setProperty('--music-energy',energy.toFixed(3));
       document.documentElement.style.setProperty('--music-energy-soft',avgEnergy.toFixed(3));
-      // NIVEL REAL: RMS de la señal temporal DESPUÉS de gainNode.
-      // A diferencia del promedio del espectro, esto sí refleja la ganancia aplicada.
-      let rms = 0;
-      if(timeData && timeData.length){
-        let sumSquares = 0;
-        for(let i=0;i<timeData.length;i++){
-          const s = timeData[i];
-          sumSquares += s*s;
-        }
-        rms = Math.sqrt(sumSquares / timeData.length);
-      }
-      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(0.000001,rms))));
+      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(.001,avgEnergy))));
       const mixPct=Math.max(0,Math.min(100,(mixDb+60)/60*100));
       const mixDbEl=document.getElementById('mixRealDb');
       const mixFill=document.getElementById('mixRealFill');
@@ -3067,23 +3053,9 @@ img,video,canvas{max-width:100%}
       if(mixMsg){mixMsg.textContent=current>=0?'PAUSADO':'EN ESPERA · REPRODUCÍ UNA CANCIÓN';mixMsg.style.color='#9bacbd';}
     }
     for(let i=0;i<bars;i++){
-      // Escala logarítmica real 60 Hz → 12 kHz. Así las últimas barras
-      // representan agudos útiles y no bins casi vacíos por encima de 12 kHz.
-      let raw = 0;
-      if (freqData && analyser && audioCtx){
-        const nyquist = audioCtx.sampleRate / 2;
-        const f1 = 60 * Math.pow(12000/60, i/bars);
-        const f2 = 60 * Math.pow(12000/60, (i+1)/bars);
-        let a = Math.max(0, Math.min(freqData.length-1, Math.floor(f1/nyquist*freqData.length)));
-        let b = Math.max(a, Math.min(freqData.length-1, Math.ceil(f2/nyquist*freqData.length)));
-        // En los agudos ampliamos levemente la ventana para que 8–12 kHz responda
-        // a la señal real y no quede visualmente muerto por la resolución del FFT.
-        if(i >= bars-6){ a=Math.max(0,a-1); b=Math.min(freqData.length-1,b+2); }
-        let sum=0, peak=0, n=0;
-        for(let k=a;k<=b;k++){ const v=freqData[k]; sum+=v; peak=Math.max(peak,v); n++; }
-        raw = n ? (sum/n)*0.60 + peak*0.40 : 0;
-      }
-      const level = audio.paused ? Math.max(2, Math.sin(Date.now()/500+i*.8)*2+3) : Math.max(2,(raw/255)*(h-18));
+      const idx = freqData ? Math.floor((i/(bars-1))*(freqData.length-1)) : 0;
+      const raw = freqData ? freqData[idx] : 0;
+      const level = audio.paused ? Math.max(2, Math.sin(Date.now()/500+i*.8)*2+3) : Math.max(3,(raw/255)*(h-18));
       const x=i*(bw+gap), y=h-level;
       vctx.fillStyle=grad;
       vctx.beginPath();
@@ -3295,34 +3267,8 @@ img,video,canvas{max-width:100%}
   progress.addEventListener('input', () => {
     if (audio.duration) audio.currentTime = (progress.value/100)*audio.duration;
   });
-  let userVolume = Number(volume.value || 1);
-
-  function applyOutputLevel(){
-    const db = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
-    // Volumen general y ganancia son controles independientes.
-    audio.volume = Math.max(0, Math.min(1, userVolume));
-    if(gainNode && audioCtx){
-      const linear = Math.pow(10, db/20);
-      gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-      gainNode.gain.setTargetAtTime(linear, audioCtx.currentTime, .015);
-    }
-  }
-
-  // Puente público para que el control de GANANCIA (que está en un bloque posterior)
-  // modifique el audio inmediatamente sin depender del alcance de esta función.
-  window.AdvancedDJsApplyGain = function(db){
-    const safeDb = Math.max(-12, Math.min(6, Number(db) || 0));
-    localStorage.setItem('advanceddjs_gain_db', String(safeDb));
-    if(!audioCtx){ try{ ensureVisualizer(); }catch(e){} }
-    applyOutputLevel();
-  };
-
-  volume.addEventListener('input', () => {
-    userVolume = Number(volume.value || 0);
-    applyOutputLevel();
-  });
-
-  applyOutputLevel();
+  volume.addEventListener('input', () => audio.volume = volume.value);
+  audio.volume = volume.value;
   drawVisualizer();
 
 
@@ -3925,14 +3871,11 @@ img,video,canvas{max-width:100%}
     const db=Number(slider?.value || 0);
     if(value) value.textContent=(db>0?'+':'')+db.toFixed(1)+' dB';
     localStorage.setItem('advanceddjs_gain_db',String(db));
-
-    // Aplica la ganancia REAL al GainNode del reproductor en el mismo instante.
-    if(typeof window.AdvancedDJsApplyGain==='function'){
-      window.AdvancedDJsApplyGain(db);
+    if(typeof gainNode!=='undefined' && gainNode && typeof audioCtx!=='undefined' && audioCtx){
+      gainNode.gain.setTargetAtTime(Math.pow(10,db/20),audioCtx.currentTime,.015);
     }
   }
   slider?.addEventListener('input',applyGain);
-  slider?.addEventListener('change',applyGain);
   applyGain();
 
   // FECHAS PÚBLICAS
