@@ -2650,7 +2650,7 @@ img,video,canvas{max-width:100%}
           <div class="mix-real-scale"><span>−60</span><span>−30</span><span>−18</span><span>−12</span><span>−6</span><span>0 dB</span></div>
           <div class="gain-control">
             <div class="gain-head">
-              <span>GANANCIA</span>
+              <span>GANANCIA REAL</span>
               <strong id="gainValue">0.0 dB</strong>
             </div>
             <input id="gainControl" type="range" min="-12" max="6" step="0.5" value="0" aria-label="Ganancia de audio">
@@ -3033,7 +3033,8 @@ img,video,canvas{max-width:100%}
       const energy = Math.max(bassEnergy*.78,avgEnergy*.58);
       document.documentElement.style.setProperty('--music-energy',energy.toFixed(3));
       document.documentElement.style.setProperty('--music-energy-soft',avgEnergy.toFixed(3));
-      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(.001,avgEnergy))));
+      const gainDbForMeter = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
+      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(.001,avgEnergy)) + Math.min(0,gainDbForMeter)));
       const mixPct=Math.max(0,Math.min(100,(mixDb+60)/60*100));
       const mixDbEl=document.getElementById('mixRealDb');
       const mixFill=document.getElementById('mixRealFill');
@@ -3277,8 +3278,29 @@ img,video,canvas{max-width:100%}
   progress.addEventListener('input', () => {
     if (audio.duration) audio.currentTime = (progress.value/100)*audio.duration;
   });
-  volume.addEventListener('input', () => audio.volume = volume.value);
-  audio.volume = volume.value;
+  let userVolume = Number(volume.value || 1);
+
+  function applyOutputLevel(){
+    const db = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
+    const gainLinear = Math.pow(10, Math.min(0, db) / 20); // reducción real y segura
+    const effective = Math.max(0, Math.min(1, userVolume * gainLinear));
+    audio.volume = effective;
+
+    // Si WebAudio está activo, dejamos la parte positiva en el GainNode.
+    // La reducción negativa ya está garantizada por audio.volume.
+    if(typeof gainNode!=='undefined' && gainNode && typeof audioCtx!=='undefined' && audioCtx){
+      const positiveLinear = db > 0 ? Math.pow(10, db/20) : 1;
+      gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+      gainNode.gain.setTargetAtTime(positiveLinear, audioCtx.currentTime, .015);
+    }
+  }
+
+  volume.addEventListener('input', () => {
+    userVolume = Number(volume.value || 0);
+    applyOutputLevel();
+  });
+
+  applyOutputLevel();
   drawVisualizer();
 
 
@@ -3881,12 +3903,18 @@ img,video,canvas{max-width:100%}
     const db=Number(slider?.value || 0);
     if(value) value.textContent=(db>0?'+':'')+db.toFixed(1)+' dB';
     localStorage.setItem('advanceddjs_gain_db',String(db));
-    // Si el usuario mueve GANANCIA antes de reproducir, inicializamos la cadena
-    // de audio para que el control no sea solamente visual.
-    if(typeof ensureVisualizer==='function' && (!gainNode || !audioCtx)){
+
+    // La reducción negativa se aplica directamente al elemento de audio.
+    // Así funciona siempre, independientemente del navegador/WebAudio.
+    if(typeof applyOutputLevel==='function'){
+      applyOutputLevel();
+    }
+
+    // Para ganancia positiva mantenemos WebAudio, si está disponible.
+    if(db > 0 && typeof ensureVisualizer==='function' && (!gainNode || !audioCtx)){
       try{ ensureVisualizer(); }catch(e){}
     }
-    if(typeof gainNode!=='undefined' && gainNode && typeof audioCtx!=='undefined' && audioCtx){
+    if(db > 0 && typeof gainNode!=='undefined' && gainNode && typeof audioCtx!=='undefined' && audioCtx){
       if(audioCtx.state==='suspended') audioCtx.resume().catch(()=>{});
       const linear=Math.pow(10,db/20);
       gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
