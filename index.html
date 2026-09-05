@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AdvancedDJs | Experiencia Profesional</title>
-<style id="advanceddjs-final-styles">
-:root{
+<title>AdvancedDJs | V52 Responsive Final</title>
+<style>
+  :root{
     --bg:#07101f;
     --panel:#070d18;
     --panel2:#0d1728;
@@ -162,6 +162,7 @@
     .progress-area{grid-column:1/-1}
   }
 
+  /* Ambiente luminoso suave de portada */
   .hero{position:relative;overflow:hidden;isolation:isolate}
   .hero::before,.hero::after{
     content:"";position:absolute;z-index:-1;pointer-events:none;
@@ -194,6 +195,7 @@
   @keyframes lineBreath{0%,100%{opacity:.25;transform:scaleX(.35)}50%{opacity:.65;transform:scaleX(.82)}}
   @media (prefers-reduced-motion:reduce){.hero::before,.hero::after,.light-beam,.hero-halo,.brand,.brand::after{animation:none!important}}
 
+  /* Laterales reactivos a la música: se activan solamente al reproducir */
   :root{--music-energy:0;--music-energy-soft:0}
   .music-side-fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;opacity:0;transition:opacity .45s ease}
   body.music-playing .music-side-fx{opacity:1}
@@ -229,6 +231,8 @@
   @media(max-width:620px){.music-side-fx{display:none}}
   @media(prefers-reduced-motion:reduce){.side-beam,.side-dots{animation:none!important}}
 
+
+  /* V3: SHOW + logo reactivo + peak hold */
   .brand{transition:text-shadow .12s ease,filter .12s ease;position:relative;z-index:2}
   body.music-playing .brand{filter:brightness(1.05)}
   .show-toggle{position:fixed;right:18px;bottom:132px;z-index:70;border:1px solid #17869a;background:rgba(4,28,39,.92);color:#eaffff;padding:10px 15px;border-radius:999px;font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.3)}
@@ -240,6 +244,8 @@
   .live-badge{display:none;margin-left:9px;padding:3px 7px;border-radius:999px;background:rgba(8,231,231,.13);border:1px solid rgba(8,231,231,.35);font-size:10px;color:var(--cyan);letter-spacing:1px;vertical-align:middle}
   body.music-playing .live-badge{display:inline-block}
 
+
+  /* V4: Galería ampliada / lightbox */
   .photo{cursor:zoom-in;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
   .photo:hover{transform:translateY(-3px) scale(1.012);border-color:#1fa9b8;box-shadow:0 14px 28px rgba(0,0,0,.32),0 0 24px rgba(8,231,231,.08)}
   .photo::after{content:"⌕";position:absolute;right:10px;bottom:9px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(2,9,16,.70);border:1px solid rgba(8,231,231,.35);color:#dfffff;font-size:20px;opacity:0;transform:translateY(5px);transition:.22s ease;backdrop-filter:blur(5px)}
@@ -260,12 +266,15 @@
   @keyframes lbZoom{from{opacity:0;transform:scale(.965)}to{opacity:1;transform:scale(1)}}
   @media(max-width:700px){.lightbox{padding:14px}.lightbox-stage{width:100%;height:76vh}.lightbox-nav{width:44px;height:58px;font-size:27px}.lightbox-prev{left:6px}.lightbox-next{right:6px}.lightbox-close{right:8px;top:8px}.lightbox-caption{bottom:8px;max-width:90%}}
 
+
+  /* V7: selección individual de fotos */
   .photo.selected{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(8,231,231,.16),0 14px 30px rgba(0,0,0,.34),0 0 26px rgba(8,231,231,.13)}
   .photo-selector{position:absolute;left:9px;top:9px;z-index:4;width:31px;height:31px;border-radius:50%;border:1px solid rgba(120,205,218,.5);background:rgba(2,10,18,.74);color:#d8f7f7;display:grid;place-items:center;cursor:pointer;font-size:16px;font-weight:900;backdrop-filter:blur(6px);transition:.18s ease}
   .photo-selector:hover{transform:scale(1.07);border-color:var(--cyan);background:rgba(5,45,57,.9)}
   .photo.selected .photo-selector{background:var(--cyan);color:#00171b;border-color:var(--cyan);box-shadow:0 0 17px rgba(8,231,231,.3)}
   .gallery-toolbar .btn:disabled{opacity:.42;cursor:not-allowed;transform:none;background:#0b1a27;border-color:#244050;color:#77909f}
 
+  /* V5: Carátula en “Ahora sonando” */
   .now{display:grid;grid-template-columns:54px minmax(0,1fr);gap:11px;align-items:center;min-width:0}
   .now-cover{width:54px;height:54px;border-radius:11px;overflow:hidden;position:relative;border:1px solid rgba(34,126,150,.58);background:radial-gradient(circle at 35% 25%,rgba(8,231,231,.22),transparent 34%),linear-gradient(145deg,#0b2030,#06101a 68%);box-shadow:0 7px 18px rgba(0,0,0,.34),inset 0 0 20px rgba(8,231,231,.035);display:grid;place-items:center;transition:width .28s ease,height .28s ease,border-radius .28s ease,box-shadow .28s ease}
   .now-cover img{width:100%;height:100%;object-fit:cover;display:none}
@@ -288,6 +297,8 @@
   @keyframes coverSpin{to{transform:rotate(360deg)}}
   @media(max-width:760px){.now{grid-template-columns:46px minmax(0,1fr);gap:9px}.now-cover{width:46px;height:46px}.player-inner{grid-template-columns:minmax(0,1fr) auto}.progress-area{grid-column:1/-1}body.show-mode .player-inner{grid-template-columns:minmax(0,1fr) auto}body.show-mode .now{grid-template-columns:60px minmax(0,1fr)}body.show-mode .now-cover{width:60px;height:60px}}
 
+
+  /* V8: Contacto + plataformas */
   .contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .contact-card,.platform-card{
     border:1px solid #173653;background:linear-gradient(180deg,#0b1728,#09121f);
@@ -332,6 +343,7 @@
   .save-links{margin-top:14px}
   @media(max-width:760px){.contact-grid,.platform-grid,.admin-links{grid-template-columns:1fr}}
 
+  /* V11: revisión pre-publicación — modo público limpio */
   #admin{display:none}
   body.admin-mode #admin{display:block}
   .admin-ui{display:none!important}
@@ -350,6 +362,8 @@
     .show-toggle{right:10px}
   }
 
+
+  /* V12: menú rápido + lista desplegable + iconos de plataformas */
   .quick-nav{position:sticky;top:0;z-index:46;background:rgba(3,9,18,.93);backdrop-filter:blur(14px);border-bottom:1px solid rgba(32,92,126,.45);box-shadow:0 8px 26px rgba(0,0,0,.2)}
   .quick-nav-inner{width:min(1180px,calc(100% - 24px));margin:auto;display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;padding:9px 0}
   .quick-nav-inner::-webkit-scrollbar{display:none}
@@ -368,6 +382,8 @@
   .platform-card.deezer .platform-icon{color:#b95cff}
   @media(max-width:760px){.quick-nav-inner{width:calc(100% - 12px)}.quick-link{padding:8px 10px;font-size:12px}}
 
+
+  /* V15 · Ajustes multiplataforma */
   .admin-access{width:auto;min-width:108px;padding:0 15px;gap:8px;display:flex;align-items:center;justify-content:center;white-space:nowrap}
   .admin-gear{font-size:17px;line-height:1}
   .admin-text{font-size:12px;font-weight:900;letter-spacing:.7px}
@@ -403,6 +419,8 @@
     .admin-access{left:max(10px,env(safe-area-inset-left));bottom:max(154px,calc(140px + env(safe-area-inset-bottom)))}
   }
 
+
+  /* V27: compartir web sin alterar las tarjetas de Contacto */
   .share-web-box{
     margin-top:14px;
     width:min(620px,100%);
@@ -434,6 +452,8 @@
     .share-web-btn{width:100%}
   }
 
+
+  /* V28: acceso directo profesional a WhatsApp */
   .whatsapp-contact{
     margin-top:14px;
     width:min(620px,100%);
@@ -470,6 +490,8 @@
     .whatsapp-contact-btn{width:100%}
   }
 
+
+  /* V29: contacto equilibrado */
   #contacto .contact-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
     align-items:stretch;
@@ -509,6 +531,7 @@
     #contacto .contact-grid{grid-template-columns:1fr}
   }
 
+
 .artist-identity{text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at 15% 15%,rgba(255,75,170,.10),transparent 28%),radial-gradient(circle at 85% 80%,rgba(8,231,231,.10),transparent 28%),linear-gradient(145deg,#07101d,#0b1424)}
 .identity-kicker{color:#87a3b7;font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase}
 .identity-title{margin:10px 0 8px;font-size:clamp(31px,5vw,54px);font-weight:900;letter-spacing:-1.5px}.identity-title span{background:linear-gradient(90deg,#ff9954,#ff5da9,#a27cff,#42dff1,#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -523,6 +546,8 @@
 .presentation-progress{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;gap:7px}.presentation-progress span{width:28px;height:3px;background:#263746}.presentation-progress span.active{background:#08e7e7}
 @media(max-width:700px){.artist-duo{grid-template-columns:1fr}.identity-lead{font-size:15px}}
 
+
+/* V31 · EXPERIENCIA ADVANCEDDJS */
 .experience-section{
   position:relative;overflow:hidden;
   background:linear-gradient(145deg,#07101c,#091522);
@@ -552,6 +577,8 @@
 .listen-now-btn:hover{transform:translateY(-2px);border-color:#ff6baa;box-shadow:0 0 25px rgba(255,92,169,.12)}
 @media(max-width:760px){.experience-grid{grid-template-columns:1fr}.experience-card{min-height:155px}}
 
+
+/* V32 · LOS DJs */
 #quienes{
   position:relative;
   overflow:hidden;
@@ -658,6 +685,8 @@
   .dj-artist-card{min-height:210px}
 }
 
+
+/* V33 · LIVE / HERO ARTÍSTICO / FECHAS */
 .hero .brand{
   background:linear-gradient(90deg,#ffffff 0%,#ff9a55 18%,#ff5fae 38%,#9a7dff 58%,#43def1 78%,#ffffff 100%);
   background-size:180% 100%;
@@ -693,6 +722,7 @@
   border-color:#ff9954;
   box-shadow:0 0 30px rgba(255,123,82,.22);
 }
+
 
 .live-section{
   position:relative;overflow:hidden;
@@ -739,6 +769,8 @@
   .live-shot,.live-shot:first-child{grid-column:auto;grid-row:auto;height:210px}
 }
 
+
+/* V34 · PREMIUM POLISH + MOBILE */
 :root{--ease-premium:cubic-bezier(.22,.8,.25,1)}
 body{overflow-x:hidden}
 .section{
@@ -748,9 +780,11 @@ body{overflow-x:hidden}
   .section:hover{border-color:rgba(49,112,145,.36)}
 }
 
+/* Aparición sutil de secciones */
 .reveal-premium{opacity:0;transform:translateY(22px);transition:opacity .72s var(--ease-premium),transform .72s var(--ease-premium)}
 .reveal-premium.revealed{opacity:1;transform:none}
 
+/* Portada más limpia y cinematográfica */
 .hero{min-height:min(620px,72vh);padding-top:70px;padding-bottom:62px}
 .hero-inner{position:relative;z-index:3}
 .hero .tagline{max-width:700px}
@@ -763,6 +797,7 @@ body{overflow-x:hidden}
 .hero-scroll-cue::after{content:"↓";color:#08e7e7;font-size:15px;animation:premiumDown 1.8s ease-in-out infinite}
 @keyframes premiumDown{0%,100%{transform:translateY(-2px);opacity:.5}50%{transform:translateY(4px);opacity:1}}
 
+/* Navegación más elegante */
 .quick-nav{transition:box-shadow .25s ease,background .25s ease}
 .quick-nav.scrolled{background:rgba(2,8,16,.975);box-shadow:0 12px 30px rgba(0,0,0,.34)}
 .quick-link{position:relative}
@@ -772,11 +807,13 @@ body{overflow-x:hidden}
 }
 .quick-link.active::after{transform:scaleX(1)}
 
+/* Tarjetas: interacción fina */
 .experience-card,.dj-artist-card,.contact-card,.platform-card,.live-shot{
   transition-duration:.32s;
   transition-timing-function:var(--ease-premium);
 }
 
+/* Botón flotante volver arriba */
 .back-top{
   position:fixed;right:18px;bottom:188px;z-index:68;width:42px;height:42px;
   border-radius:50%;border:1px solid #23536b;background:rgba(5,20,31,.9);
@@ -786,10 +823,12 @@ body{overflow-x:hidden}
 .back-top.visible{opacity:1;pointer-events:auto;transform:none}
 .back-top:hover{border-color:#08e7e7;color:#fff}
 
+/* Ajustes de legibilidad y ritmo */
 #identidad,#experiencia,#live,#quienes,#musica,#galeria,#contacto,#plataformas{scroll-margin-top:76px}
 .live-copy,.identity-lead,.experience-intro{line-height:1.65}
 .dj-artist-name{max-width:95%}
 
+/* MOBILE PREMIUM */
 @media(max-width:760px){
   body{padding-bottom:164px}
   .hero{
@@ -844,6 +883,7 @@ body{overflow-x:hidden}
 
   .back-top{right:10px;bottom:205px;width:39px;height:39px}
 
+  /* reproductor: compacto pero usable */
   .player-inner{padding:8px 9px}
   .now-cover{width:43px;height:43px}
   .now{grid-template-columns:43px minmax(0,1fr)}
@@ -865,6 +905,8 @@ body{overflow-x:hidden}
   .reveal-premium{opacity:1;transform:none}
 }
 
+
+/* V35 · LIVE robusto también al probar el HTML localmente */
 .live-shot{cursor:zoom-in}
 .live-shot img{background:#08121e}
 .live-viewer{
@@ -892,6 +934,8 @@ body{overflow-x:hidden}
   .live-viewer img{max-width:96vw;max-height:78vh}
 }
 
+
+/* V36 · NOW PLAYING EXPERIENCE */
 .dj-now-intro{
   position:fixed;
   inset:0;
@@ -1007,6 +1051,8 @@ body{overflow-x:hidden}
   .dj-now-brand,.dj-now-bars i{animation:none!important}
 }
 
+
+/* V37 · PREMIUM FINISH — microanimaciones livianas */
 .section h2{
   position:relative;
   display:inline-block;
@@ -1030,6 +1076,7 @@ body{overflow-x:hidden}
   opacity:.9;
 }
 
+/* Luz muy sutil que recorre los CTA principales */
 .hero-cta.primary,.presentation-btn,.listen-now-btn{
   position:relative;
   overflow:hidden;
@@ -1058,6 +1105,7 @@ body{overflow-x:hidden}
   to{left:120%}
 }
 
+/* Fotografías más editoriales */
 .live-shot img,.photo img{
   transition:transform .6s cubic-bezier(.22,.8,.25,1),filter .6s ease;
 }
@@ -1081,6 +1129,7 @@ body{overflow-x:hidden}
   }
 }
 
+/* Los DJs: acento visual más fino */
 .dj-artist-card::before{
   content:"";
   position:absolute;
@@ -1094,6 +1143,7 @@ body{overflow-x:hidden}
 .dj-artist-card.victor::before{background:linear-gradient(#ff9954,#ff5da9)}
 .dj-artist-card.cristian::before{background:linear-gradient(#9b76ff,#08e7e7)}
 
+/* Reproductor: presencia más limpia */
 .player{
   box-shadow:0 -16px 45px rgba(0,0,0,.28);
 }
@@ -1111,6 +1161,7 @@ body{overflow-x:hidden}
   50%{transform:scale(1.035)}
 }
 
+/* Transiciones táctiles sin efectos pesados */
 @media(max-width:760px){
   .section h2::after{bottom:-5px}
   .hero-cta:active,.presentation-btn:active,.listen-now-btn:active,
@@ -1118,12 +1169,15 @@ body{overflow-x:hidden}
   .live-shot img,.photo img{transition-duration:.35s}
 }
 
+/* Respeto a accesibilidad y ahorro de recursos */
 @media(prefers-reduced-motion:reduce){
   .section h2::after{transition:none;transform:scaleX(1)}
   .hero-cta.primary::after,.presentation-btn::after,.listen-now-btn::after,
   .player.playing .now-cover img{animation:none!important}
 }
 
+
+/* V38 · MUSIC STAGE — destino principal de "Escuchá AdvancedDJs" */
 #musica{
   position:relative;
   overflow:hidden;
@@ -1310,6 +1364,8 @@ body{overflow-x:hidden}
   #musica.music-playing .music-now-dot{animation:none}
 }
 
+
+/* V39 · 6 TRACKS / REVEAL */
 #tracksExpand{
   width:100%;
   min-height:46px;
@@ -1350,6 +1406,8 @@ body{overflow-x:hidden}
   #trackList.expanded .track:nth-child(n+4){animation:none}
 }
 
+
+/* V40 · HERO MINI PLAYER + DJ BOBO WELCOME */
 .hero-mini-player{
   width:min(760px,100%);
   margin:22px auto 0;
@@ -1493,6 +1551,8 @@ body.music-playing .hero-music-aura{
   body.music-playing .hero-music-aura{animation:none!important}
 }
 
+
+/* V41 · SMART HERO PLAYER + SHARE */
 .hero-mini-player{grid-template-columns:auto auto minmax(0,1fr) auto auto}
 .hero-mini-skip{
   position:relative;z-index:2;width:34px;height:34px;border-radius:50%;
@@ -1533,6 +1593,8 @@ body.music-playing .hero-mini-art{box-shadow:0 0 22px rgba(8,231,231,.13);transf
   .hero-mini-right{padding-left:0;grid-column:1/-1}
 }
 
+
+/* V42 · PRESENTATION SHOW */
 .dj-presentation{
   background:
     radial-gradient(circle at 18% 20%,rgba(255,82,158,.10),transparent 30%),
@@ -1664,6 +1726,7 @@ body.music-playing .hero-mini-art{box-shadow:0 0 22px rgba(8,231,231,.13);transf
 .presentation-skip.prev{left:18px}
 .presentation-skip.next{right:18px}
 
+/* V51 · Presentación: ecosistema web horizontal, legible y público */
 .ps-sites{
   display:flex;flex-direction:column;gap:10px;
   width:min(820px,82vw);margin:28px auto 0;
@@ -1713,6 +1776,10 @@ body.music-playing .hero-mini-art{box-shadow:0 0 22px rgba(8,231,231,.13);transf
   .dj-presentation.music-active .presentation-eq i{animation:none!important}
 }
 
+
+/* V43 · FIX MUSIC GRID + HERO REACTIVE SIDES */
+
+/* --- Music Stage: botón Ver más dentro de la columna izquierda --- */
 .music-list-column{
   min-width:0;
   display:flex;
@@ -1735,6 +1802,7 @@ body.music-playing .hero-mini-art{box-shadow:0 0 22px rgba(8,231,231,.13);transf
   #tracksExpand{min-height:40px;font-size:9px}
 }
 
+/* --- Portada: reproductor más compacto --- */
 .hero-mini-player{
   width:min(650px,100%) !important;
   padding:10px 12px !important;
@@ -1762,6 +1830,7 @@ body.music-playing .hero-mini-art{box-shadow:0 0 22px rgba(8,231,231,.13);transf
 .hero-mini-status{margin-top:6px !important;font-size:8px !important}
 .hero-share{margin-top:7px !important}
 
+/* --- Efectos laterales reactivos, discretos y fuera del contenido --- */
 .hero-reactive-side{display:none !important;
   position:absolute;
   top:10%;
@@ -1817,6 +1886,7 @@ body.music-playing .hero-reactive-side.right{
   100%{opacity:.27;filter:saturate(1) brightness(.95)}
 }
 
+/* pequeñas partículas luminosas laterales */
 .hero-reactive-side .spark{
   position:absolute;
   width:3px;height:3px;border-radius:50%;
@@ -1839,6 +1909,7 @@ body.music-playing .hero-reactive-side .s4{animation-delay:1.2s}
   to{transform:translateY(-15px) scale(1.6);opacity:.9}
 }
 
+/* contenido de portada siempre por encima */
 .hero-inner{position:relative;z-index:3}
 
 @media(max-width:850px){
@@ -1856,6 +1927,8 @@ body.music-playing .hero-reactive-side .s4{animation-delay:1.2s}
   body.music-playing .hero-reactive-side .spark{animation:none!important}
 }
 
+
+/* V44 · REACTIVE SIDE SHOW — aparece sólo cuando suena la música */
 .hero-side-show{
   position:absolute;
   top:7%;
@@ -1879,6 +1952,7 @@ body.music-playing .hero-side-show.right{
   transform:scaleX(-1) translateX(12px);
 }
 
+/* haces verticales */
 .hero-side-beam{
   position:absolute;
   top:10%;
@@ -1911,6 +1985,7 @@ body.music-playing .hero-side-beam.b3{animation-delay:.7s}
   to{transform:scaleY(1.03);opacity:.72}
 }
 
+/* onda lateral */
 .hero-side-wave{
   position:absolute;
   left:18%;
@@ -1944,6 +2019,7 @@ body.music-playing .hero-side-wave{
   to{transform:skewY(7deg) scale(1.05);opacity:.52}
 }
 
+/* puntos / destellos */
 .hero-side-dot{
   position:absolute;
   width:4px;height:4px;border-radius:50%;
@@ -1968,6 +2044,7 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   to{transform:translateY(-11px) scale(1.55);opacity:.9}
 }
 
+/* evita que se superponga con el contenido */
 .hero-inner{position:relative;z-index:4}
 
 @media(max-width:1000px){
@@ -1991,16 +2068,30 @@ body.music-playing .hero-side-dot.d5{animation-delay:1.05s}
   body.music-playing .hero-side-dot{animation:none!important}
 }
 
+
+  /* V45 · AdvancedDJs Music público */
   #musica{background:radial-gradient(circle at 88% 8%,rgba(255,92,169,.055),transparent 27%),radial-gradient(circle at 10% 92%,rgba(8,231,231,.055),transparent 30%),rgba(5,11,22,.96)}
   #musica .music-stage-heading h2{background:linear-gradient(90deg,#fff,#ff6baa,#9a7dff,#43def1);-webkit-background-clip:text;background-clip:text;color:transparent}
   #musica .music-stage-kicker{letter-spacing:1.5px}
 
+
+  /* V46 · acceso privado a biblioteca por Tailscale */
   .private-library-box{margin:0 0 20px;padding:15px 16px;border:1px solid rgba(154,125,255,.38);border-radius:14px;background:linear-gradient(90deg,rgba(34,20,60,.52),rgba(6,31,43,.58));display:flex;align-items:center;justify-content:space-between;gap:14px}
   .private-library-copy{min-width:0}.private-library-copy b{display:block;color:#fff;font-size:15px}.private-library-copy span{display:block;margin-top:4px;color:#91a5b7;font-size:12px;line-height:1.45}
   .private-library-btn{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 15px;border-radius:999px;border:1px solid rgba(154,125,255,.65);background:#17122a;color:#fff;text-decoration:none;font-weight:900;font-size:12px;white-space:nowrap;box-shadow:0 0 18px rgba(154,125,255,.08)}
   .private-library-btn:hover{transform:translateY(-1px);border-color:#b99cff;background:#21183a}
   @media(max-width:620px){.private-library-box{align-items:stretch;flex-direction:column}.private-library-btn{width:100%}}
 
+
+/* V51 PUBLICA: ADMIN retirado de la interfaz y presentación de sitios en barras horizontales. */
+
+/* =========================================================
+   V52 RESPONSIVE FINAL · PC / NOTEBOOK / TABLET / CELULAR
+   Ajustes exclusivamente responsivos. No altera identidad,
+   contenido ni funciones principales de AdvancedDJs.
+   ========================================================= */
+
+/* Base fluida */
 html,body{max-width:100%;overflow-x:hidden}
 img,video,canvas{max-width:100%}
 .wrap{width:min(1180px,calc(100% - 32px))}
@@ -2008,6 +2099,7 @@ img,video,canvas{max-width:100%}
 .quick-nav-inner{justify-content:center}
 .section{scroll-margin-top:76px}
 
+/* PC grande */
 @media (min-width:1400px){
   .wrap{width:min(1220px,calc(100% - 64px))}
   .hero-inner{max-width:1120px}
@@ -2015,6 +2107,7 @@ img,video,canvas{max-width:100%}
   .live-grid{grid-template-rows:230px 230px}
 }
 
+/* Notebook / PC mediana */
 @media (min-width:901px) and (max-width:1399px){
   .wrap{width:min(1060px,calc(100% - 28px))}
   .section{padding:28px 28px;margin:26px 0}
@@ -2025,6 +2118,7 @@ img,video,canvas{max-width:100%}
   .hero-cta{padding:0 17px}
 }
 
+/* Tablet horizontal / vertical */
 @media (min-width:621px) and (max-width:900px){
   body{padding-bottom:142px}
   .wrap{width:min(100% - 24px,860px)}
@@ -2055,6 +2149,7 @@ img,video,canvas{max-width:100%}
   .progress-area{grid-column:1/-1}
 }
 
+/* Celular */
 @media (max-width:620px){
   body{padding-bottom:154px}
   .wrap{width:calc(100% - 14px)}
@@ -2123,6 +2218,7 @@ img,video,canvas{max-width:100%}
   .share-web-btn{width:100%}
   footer{padding-bottom:20px}
 
+  /* Presentación full-screen */
   .presentation-stage{padding:66px 12px 55px}
   .presentation-slide{width:94vw}
   .ps-brand{font-size:clamp(46px,18vw,74px);letter-spacing:-2px}
@@ -2133,6 +2229,7 @@ img,video,canvas{max-width:100%}
   .presentation-close{right:10px;top:10px;width:41px;height:41px}
   .presentation-progress{bottom:18px}
 
+  /* Barra del reproductor inferior */
   .player-inner{grid-template-columns:minmax(0,1fr) auto;padding:8px 8px;gap:7px}
   .now{grid-template-columns:44px minmax(0,1fr);gap:8px}
   .now-cover{width:44px;height:44px}
@@ -2148,6 +2245,7 @@ img,video,canvas{max-width:100%}
   .show-toggle{right:8px;bottom:112px;padding:8px 11px;font-size:11px}
 }
 
+/* Celulares muy angostos */
 @media (max-width:390px){
   .brand{font-size:39px}
   .chip{font-size:9.5px}
@@ -2157,6 +2255,7 @@ img,video,canvas{max-width:100%}
   .live-shot,.live-shot:first-child{height:185px}
 }
 
+/* Orientación horizontal en móviles */
 @media (max-height:520px) and (orientation:landscape) and (max-width:950px){
   .hero{padding-top:28px;padding-bottom:24px}
   .hero-actions{grid-template-columns:repeat(2,1fr)}
@@ -2167,6 +2266,7 @@ img,video,canvas{max-width:100%}
   .presentation-progress{bottom:10px}
 }
 
+/* Accesibilidad táctil */
 @media (hover:none) and (pointer:coarse){
   .quick-link,.hero-cta,.btn,.direct-link,.private-library-btn,
   .presentation-btn,.listen-now-btn,.control,.play-track{
@@ -2174,6 +2274,10 @@ img,video,canvas{max-width:100%}
   }
 }
 
+</style>
+
+<style id="v47-cleanup">
+/* V47 · limpieza visual y funcional */
 .artist-identity{padding-top:27px;padding-bottom:27px}
 .artist-identity .identity-lead{max-width:760px;margin-bottom:16px}
 .artist-identity .identity-signature{margin-top:14px}
@@ -2184,7 +2288,10 @@ img,video,canvas{max-width:100%}
   .artist-identity{padding-top:22px;padding-bottom:22px}
   .quick-nav-inner{gap:3px}
 }
+</style>
 
+<style id="v49-identity-nav-polish">
+/* V49 · vuelve la identidad de los dos DJs y alinea el menú principal */
 #identidad.artist-identity{
   display:block !important;
   margin-top:28px;
@@ -2226,112 +2333,19 @@ img,video,canvas{max-width:100%}
   .quick-nav-inner{justify-content:flex-start;}
   #identidad.artist-identity{padding:24px 18px;margin-top:18px;}
 }
+</style>
+</head>
+<body>
 
-.adjs-news{
-  position:relative;z-index:12;width:100%;height:50px;min-height:50px;overflow:hidden;
-  border-top:1px solid rgba(159,100,255,.48);border-bottom:1px solid rgba(41,211,234,.42);
-  background:linear-gradient(90deg,#160d25 0%,#091426 48%,#06242d 100%);
-  box-shadow:0 9px 28px rgba(0,0,0,.38),inset 0 0 26px rgba(83,87,220,.08);
-}
-.adjs-news::before{
-  content:"INFORMATIVO";position:absolute;z-index:4;left:0;top:0;bottom:0;
-  display:flex;align-items:center;padding:0 18px;color:#fff;font-size:11px;font-weight:900;
-  letter-spacing:.13em;background:linear-gradient(105deg,#a93bd3,#536cf4 54%,#22c5d7);
-  box-shadow:12px 0 24px rgba(2,7,15,.94);text-shadow:0 1px 5px #28356b;
-}
-.adjs-news-window{height:100%;margin-left:129px;display:flex;align-items:center;overflow:hidden}
-.adjs-news-track{display:flex;align-items:center;width:max-content;white-space:nowrap;will-change:transform;animation:adjsNewsMove 68s linear infinite}
-.adjs-news-group{display:flex;align-items:center;flex:none}
-.adjs-news-item{display:inline-flex;align-items:center;color:#f2eef8;font-size:14px;font-weight:750;line-height:1}
-.adjs-news-sep{display:inline-block;margin:0 26px;color:#bd78ff;font-size:13px;text-shadow:0 0 11px #8c5dff}
-.adjs-news-link{
-  color:#8feaf6;text-decoration:underline;text-decoration-color:rgba(143,234,246,.48);
-  text-underline-offset:3px;border:1px solid rgba(77,202,224,.28);border-radius:999px;
-  padding:6px 10px;background:rgba(20,126,156,.12);cursor:pointer;
-}
-.adjs-news-link:hover,.adjs-news-link:focus{color:#fff;border-color:#62e7f4;background:rgba(37,191,214,.24);box-shadow:0 0 13px rgba(66,219,238,.25);outline:none}
-.adjs-news:hover .adjs-news-track,.adjs-news:focus-within .adjs-news-track{animation-play-state:paused}
-@keyframes adjsNewsMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
-@media(min-width:1400px){.hero{min-height:545px!important;padding-top:55px!important;padding-bottom:46px!important}}
-@media(min-width:901px) and (max-width:1399px){.hero{min-height:500px!important;padding-top:48px!important;padding-bottom:40px!important}}
-@media(max-width:620px){
-  .adjs-news{height:42px;min-height:42px}.adjs-news::before{content:"INFO";padding:0 10px;font-size:9px;letter-spacing:.10em}
-  .adjs-news-window{margin-left:51px}.adjs-news-item{font-size:12px}.adjs-news-sep{margin:0 18px;font-size:11px}
-  .adjs-news-link{padding:5px 8px}.adjs-news-track{animation-duration:60s}
-}
-@media(max-height:520px) and (orientation:landscape) and (max-width:950px){.adjs-news{height:40px;min-height:40px}}
-@media(prefers-reduced-motion:reduce){.adjs-news-track{animation-duration:110s}}
-
-.hero{min-height:clamp(600px,78svh,790px)!important;display:flex;align-items:center;padding:clamp(46px,7vh,78px) clamp(18px,4vw,64px)!important;background:radial-gradient(circle at 78% 42%,rgba(15,224,210,.12),transparent 32%),radial-gradient(circle at 18% 74%,rgba(126,93,255,.10),transparent 28%),linear-gradient(118deg,#030817 0%,#071225 55%,#06252c 100%)!important}
-
-.hero::before,.hero::after,.hero-lights,.hero-side-show,.hero-reactive-side{display:none!important}
-.hero .brand{animation:none!important;text-shadow:none!important;filter:none!important;isolation:isolate}
-.hero .brand::after{display:none!important}
-.hero-inner{width:min(1500px,100%)!important;max-width:none!important;display:grid!important;grid-template-columns:minmax(0,1.06fr) minmax(430px,.94fr);grid-template-areas:"brand player" "claim player" "tag player" "chips player" "actions player" "cue share" "cue status";column-gap:clamp(48px,6vw,105px);row-gap:0;align-items:center;text-align:left!important}
-.hero .brand{grid-area:brand;margin:0!important;font-size:clamp(74px,7.2vw,122px)!important;line-height:.86!important;letter-spacing:-.065em!important;white-space:nowrap}.hero .brand+div{grid-area:claim;margin:24px 0 0!important;max-width:680px;font-size:clamp(23px,2.05vw,34px)!important;line-height:1.12!important}.hero .tagline{grid-area:tag;margin:20px 0 0!important;max-width:650px!important;font-size:clamp(16px,1.25vw,20px)!important;line-height:1.55!important;color:#b9cad9!important}.hero .chips{grid-area:chips;justify-content:flex-start!important;margin:22px 0 0!important}
-.hero-actions{grid-area:actions;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:680px;margin:28px 0 0!important;gap:10px!important}.hero-cta{min-height:50px!important}.hero-scroll-cue{grid-area:cue;text-align:left;margin:22px 0 0!important}.hero-scroll-cue::after{display:inline-block;margin-left:8px}
-.hero-mini-player{grid-area:player;width:100%!important;min-height:292px;padding:32px!important;margin:0!important;grid-template-columns:auto auto minmax(0,1fr) auto!important;align-content:center;position:relative;overflow:hidden;border:1px solid rgba(93,221,230,.42)!important;border-radius:28px!important;background:linear-gradient(145deg,rgba(11,29,47,.97),rgba(4,14,27,.98))!important;box-shadow:0 38px 90px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.07),0 0 60px rgba(8,231,231,.06)!important}.hero-mini-player::after{content:"ADVANCEDDJS · LIVE AUDIO SYSTEM";position:absolute;right:25px;top:22px;color:#58e7df;font-size:9px;font-weight:900;letter-spacing:.18em}
-.hero-mini-art{width:72px!important;height:72px!important;border-radius:18px!important}.hero-mini-play{width:58px!important;height:58px!important;font-size:20px}.hero-mini-skip{width:38px!important;height:38px!important}.hero-mini-track{font-size:19px!important;line-height:1.2!important}.hero-mini-sub{font-size:12px!important;margin-top:6px}.hero-mini-label{font-size:9px!important}.hero-mini-right{grid-column:1/-1!important;padding:24px 0 0!important;margin-top:24px!important;border-top:1px solid rgba(92,144,173,.24)}.hero-mini-eq{width:100%!important;height:43px!important;justify-content:center!important;gap:8px!important}.hero-mini-eq i{width:7px!important;border-radius:8px!important}.hero-mini-time{text-align:center!important;font-size:11px!important;margin-top:8px}.hero-share{grid-area:share;justify-self:center;margin:22px 0 0!important}.hero-mini-status{grid-area:status;justify-self:center;margin:8px 0 0!important}.hero-music-aura{grid-column:2;grid-row:1/8}
-#musica .music-stage{align-items:start!important}.visualizer-card{height:auto!important;min-height:0!important;align-self:start}.mix-real-meter{margin-top:16px;padding:15px;border:1px solid rgba(72,119,151,.42);border-radius:13px;background:linear-gradient(145deg,rgba(10,19,30,.96),rgba(5,13,22,.98))}.mix-real-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.mix-real-title{font-weight:900;font-size:13px;letter-spacing:.02em;color:#eef8ff}.mix-real-db{font-weight:900;font-size:18px;color:#63eccd;font-variant-numeric:tabular-nums}.mix-real-track{position:relative;height:12px;border-radius:999px;background:#02070c;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}.mix-real-fill{height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#42b77d 0%,#65e4a6 56%,#f2f5f5 76%,#5ce6ff 89%,#4e82ff 100%);transition:width .1s linear;box-shadow:0 0 15px rgba(95,235,193,.22)}.mix-real-scale{display:grid;grid-template-columns:repeat(6,1fr);margin-top:7px;color:#71859b;font-size:8px}.mix-real-scale span:nth-child(n+4){text-align:center}.mix-real-scale span:last-child{text-align:right;color:#68dfff}.mix-real-message{margin-top:10px;padding:8px 10px;border:1px solid rgba(83,115,142,.32);border-radius:8px;text-align:center;color:#8fa2b6;font-size:9px;font-weight:800;letter-spacing:.02em}
-#musica.music-expanded .music-stage{grid-template-columns:1fr!important}#musica.music-expanded .visualizer-card{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);grid-template-areas:"head meter" "canvas meter" "labels meter";gap:0 18px;width:100%}#musica.music-expanded .visualizer-head{grid-area:head}#musica.music-expanded #visualizer{grid-area:canvas;height:150px!important}#musica.music-expanded .eq-labels{grid-area:labels}#musica.music-expanded .mix-real-meter{grid-area:meter;margin:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center}
-@media(max-width:1100px){.hero-inner{grid-template-columns:1fr!important;grid-template-areas:"brand" "claim" "tag" "chips" "actions" "player" "share" "status" "cue";text-align:center!important;max-width:780px!important}.hero .brand+div,.hero .tagline{margin-left:auto!important;margin-right:auto!important}.hero .chips{justify-content:center!important}.hero-actions{margin-left:auto!important;margin-right:auto!important}.hero-mini-player{margin-top:34px!important}.hero-scroll-cue{text-align:center}.hero-mini-status{grid-area:status}}
-@media(max-width:800px){#musica.music-expanded .visualizer-card{display:flex;grid-template-columns:none}.hero-actions{grid-template-columns:1fr!important}.hero-mini-player{min-height:245px;padding:23px!important}}
-@media(max-width:520px){.hero{padding:34px 12px 28px!important}.hero .brand{font-size:clamp(43px,15vw,64px)!important}.hero .brand+div{font-size:22px!important}.hero-mini-player{padding:18px!important;border-radius:20px!important}.hero-mini-player::after{display:none}.hero-mini-art{width:48px!important;height:48px!important}.hero-mini-play{width:47px!important;height:47px!important}.hero-mini-skip{width:30px!important}.hero-mini-track{font-size:14px!important}.mix-real-meter{padding:12px}}
-@media(min-width:1700px){.hero-inner{width:min(1640px,92vw)!important}.hero{min-height:720px!important}}@media(min-width:2200px){.hero{min-height:760px!important}.hero-inner{width:min(1900px,88vw)!important}.hero .brand{font-size:132px!important}}
-@media(max-height:620px) and (orientation:landscape){.hero{min-height:auto!important;padding-top:32px!important;padding-bottom:32px!important}.hero-inner{grid-template-columns:minmax(0,1fr) minmax(390px,.8fr);grid-template-areas:"brand player" "claim player" "actions player"}.hero .tagline,.hero .chips,.hero-scroll-cue,.hero-share,.hero-mini-status{display:none!important}.hero-mini-player{min-height:225px!important}.hero .brand{font-size:62px!important}}
-
-.hero{min-height:clamp(590px,74svh,740px)!important;background:radial-gradient(circle at 76% 44%,rgba(56,156,174,.095),transparent 31%),linear-gradient(122deg,#050810 0%,#09111d 54%,#081b22 100%)!important}
-.hero-inner{grid-template-columns:minmax(0,.92fr) minmax(500px,1.08fr);column-gap:clamp(56px,6vw,112px)}
-.hero .brand{font-size:clamp(62px,5.8vw,96px)!important;letter-spacing:-.052em!important;color:#f2f5f7!important;background:none!important;-webkit-text-fill-color:initial!important}
-.hero .brand span{color:#88c7d2!important}
-.hero .brand+div{font-size:clamp(22px,1.75vw,29px)!important;font-weight:650!important;letter-spacing:-.018em!important;color:#f5f7f8!important}
-.hero .tagline{font-size:17px!important;line-height:1.6!important;color:#9eacb9!important}
-.chip{border-radius:7px!important;border-color:rgba(113,151,171,.34)!important;background:rgba(9,18,29,.68)!important;color:#c7d1d9!important;font-size:12px!important}
-.hero-cta{border-radius:10px!important;min-height:48px!important;background:#0a1722!important;border-color:#29475a!important;color:#ecf2f5!important;box-shadow:none!important;letter-spacing:.025em!important}
-.hero-cta:hover{transform:translateY(-1px)!important;border-color:#76bcc8!important;background:#0d202b!important;box-shadow:0 10px 28px rgba(0,0,0,.25)!important}
-.hero-cta.primary{background:linear-gradient(90deg,#102432,#12202d)!important;border-color:#6caebb!important;color:#fff!important}
-.hero-cta.request-song{background:linear-gradient(90deg,#2a2119,#241923)!important;border-color:#9b7047!important;color:#f6efe8!important}
-.hero-mini-player{min-height:250px!important;padding:28px 30px!important;grid-template-columns:auto auto minmax(0,1fr) auto auto!important;border-radius:18px!important;border-color:rgba(92,148,169,.48)!important;background:linear-gradient(155deg,rgba(10,22,34,.99),rgba(5,12,20,.99))!important;box-shadow:0 28px 70px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.045)!important}
-.hero-mini-player::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:linear-gradient(180deg,#79c4ce,#497481 55%,transparent)}
-.hero-mini-player::after{color:#83cbd3!important;opacity:.82}.hero-mini-art{width:64px!important;height:64px!important;border-radius:10px!important;box-shadow:none!important}.hero-mini-play{width:52px!important;height:52px!important;border-color:#6cb4c0!important;background:#0a2029!important;box-shadow:none!important}.hero-mini-skip{border-radius:8px!important;background:#091723!important}.hero-mini-track{font-size:18px!important;color:#f3f6f7!important}.hero-mini-label{color:#748c9d!important;letter-spacing:.16em!important}.hero-mini-right{margin-top:21px!important;padding-top:20px!important}.hero-mini-eq i{background:#527f8d!important;box-shadow:none!important}.hero-share{color:#8597a6!important}.hero-mini-status{color:#76bdc5!important}
-@media(max-width:1100px){.hero-inner{grid-template-columns:1fr!important}.hero .brand{font-size:clamp(58px,10vw,88px)!important}.hero-mini-player{max-width:760px!important;margin-left:auto!important;margin-right:auto!important}}
-@media(max-width:520px){.hero .brand{font-size:clamp(42px,14vw,58px)!important}.hero-mini-player{grid-template-columns:auto auto minmax(0,1fr) auto auto!important;padding:18px 15px!important}.hero-mini-art{width:44px!important;height:44px!important}.hero-mini-skip{width:28px!important;height:34px!important}.hero-mini-play{width:44px!important;height:44px!important}.hero-mini-track{font-size:14px!important}}
-
+<style id="v48-real-cleanup">
+/* V48: limpieza visual fuerte. Se ocultan bloques repetidos sin romper su lógica interna. */
 #galeria, #plataformas { display:none !important; }
 #contacto .whatsapp-contact { display:none !important; }
 #contacto .contact-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 #contacto .share-web-box { margin-top:18px; }
 #live .live-grid { margin-top:18px; }
 @media (max-width:760px){ #contacto .contact-grid{grid-template-columns:1fr;} }
-
-/* AdvancedDJs · Fechas + Ganancia */
-.dates-section-pro{align-items:start}
-.dates-main{min-width:0}
-.dates-list{display:grid;gap:10px;margin-top:20px}
-.date-card{display:grid;grid-template-columns:72px minmax(0,1fr);gap:15px;align-items:center;padding:14px;border:1px solid #1a435c;border-radius:14px;background:linear-gradient(135deg,#091725,#07111d);box-shadow:0 10px 24px rgba(0,0,0,.16)}
-.date-day{display:grid;place-items:center;min-height:64px;border-radius:11px;background:rgba(8,231,231,.07);border:1px solid rgba(8,231,231,.24)}
-.date-day strong{font-size:25px;line-height:1;color:#fff}.date-day span{font-size:10px;letter-spacing:1.5px;color:#08e7e7;font-weight:900}
-.date-info b{display:block;font-size:16px}.date-info span{display:block;color:#91a6b7;font-size:13px;margin-top:5px}
-.dates-empty{padding:14px 0;color:#8196a7;font-size:13px}
-.gain-control{margin:14px 0 12px;padding:12px 13px;border:1px solid rgba(39,101,132,.45);border-radius:10px;background:rgba(3,12,20,.42)}
-.gain-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:11px;font-weight:900;letter-spacing:.8px;color:#b9cfda}
-.gain-head strong{color:#08e7e7;font-size:13px}
-#gainControl{width:100%;accent-color:#08e7e7}
-.gain-scale{display:flex;justify-content:space-between;color:#5f8095;font-size:9px;margin-top:3px}
-@media(max-width:620px){.date-card{grid-template-columns:62px minmax(0,1fr)}}
-
 </style>
-
-
-
-
-
-
-</head>
-<body>
-
-
 <div class="dj-now-intro" id="djNowIntro" aria-hidden="true">
   <div class="dj-now-panel">
     <div class="dj-now-kicker">NOW PLAYING</div>
@@ -2457,33 +2471,6 @@ img,video,canvas{max-width:100%}
   </div>
 </header>
 
-<aside class="adjs-news" aria-label="Informativo y accesos directos de AdvancedDJs">
-  <div class="adjs-news-window">
-    <div class="adjs-news-track">
-      <div class="adjs-news-group">
-        <span class="adjs-news-item">Victor Fernández DJ · Electro · Dance · Pop</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item">Cristian Páez DJ · Electro · Dance · House</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item">Próximamente · AdvancedDJs en vivo desde Río Cuarto</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item">AdvancedDJs · Música electrónica todos los días, las 24 horas</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Conocenos · advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://musica.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Escuchanos · musica.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://radio.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Radio · radio.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://pedidos.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Pedidos · pedidos.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-      </div>
-      <div class="adjs-news-group">
-        <span class="adjs-news-item">Victor Fernández DJ · Electro · Dance · Pop</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item">Cristian Páez DJ · Electro · Dance · House</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item">Próximamente · AdvancedDJs en vivo desde Río Cuarto</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item">AdvancedDJs · Música electrónica todos los días, las 24 horas</span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Conocenos · advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://musica.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Escuchanos · musica.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://radio.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Radio · radio.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-        <span class="adjs-news-item"><a class="adjs-news-link" href="https://pedidos.advanceddjs.com.ar" target="_blank" rel="noopener">🔗 Pedidos · pedidos.advanceddjs.com.ar</a></span><span class="adjs-news-sep">◆</span>
-      </div>
-    </div>
-  </div>
-</aside>
-
 <nav class="quick-nav" aria-label="Menú principal">
   <div class="quick-nav-inner">
     <a class="quick-link" href="#inicio"><span class="mi">⌂</span>Inicio</a>
@@ -2551,17 +2538,16 @@ img,video,canvas{max-width:100%}
 
 
   <section class="section" id="fechas">
-    <div class="dates-section dates-section-pro">
-      <div class="dates-main">
-        <div class="dates-label">Live dates · AdvancedDJs</div>
+    <div class="dates-section">
+      <div>
+        <div class="dates-label">Live dates</div>
         <div class="dates-title">Próximas <span>fechas</span></div>
-        <div class="dates-copy">Agenda oficial de presentaciones de AdvancedDJs.</div>
-        <div class="dates-list" id="datesList"></div>
+        <div class="dates-copy">Las próximas presentaciones de AdvancedDJs van a aparecer acá. Seguinos para enterarte cuando anunciemos una nueva fecha.</div>
       </div>
-      <div class="dates-badge dates-side">
-        <b id="datesBadgeTitle">PRÓXIMAMENTE</b>
-        <span id="datesBadgeText">Nuevas fechas</span>
-        <a class="dates-link" href="https://www.instagram.com/advanceddjs/" target="_blank" rel="noopener">Instagram ↗</a>
+      <div class="dates-badge">
+        <b>PRÓXIMAMENTE</b>
+        <span>Nuevas fechas</span>
+        <a class="dates-link" href="https://www.instagram.com/advanceddjs/" target="_blank" rel="noopener">Seguir en Instagram ↗</a>
       </div>
     </div>
   </section>
@@ -2644,20 +2630,6 @@ img,video,canvas{max-width:100%}
         </div>
         <canvas id="visualizer" width="520" height="180" aria-label="Visualizador de audio"></canvas>
         <div class="eq-labels"><span>60</span><span>250</span><span>1K</span><span>4K</span><span>16K Hz</span></div>
-        <div class="mix-real-meter" aria-label="Medidor de nivel real de la mezcla">
-          <div class="mix-real-head"><span class="mix-real-title">MIX · NIVEL REAL</span><span class="mix-real-db" id="mixRealDb">−∞</span></div>
-          <div class="mix-real-track"><div class="mix-real-fill" id="mixRealFill"></div></div>
-          <div class="mix-real-scale"><span>−60</span><span>−30</span><span>−18</span><span>−12</span><span>−6</span><span>0 dB</span></div>
-          <div class="gain-control">
-            <div class="gain-head">
-              <span>GANANCIA</span>
-              <strong id="gainValue">0.0 dB</strong>
-            </div>
-            <input id="gainControl" type="range" min="-12" max="6" step="0.5" value="0" aria-label="Ganancia de audio">
-            <div class="gain-scale"><span>−12 dB</span><span>0 dB</span><span>+6 dB</span></div>
-          </div>
-          <div class="mix-real-message" id="mixRealMessage">EN ESPERA · REPRODUCÍ UNA CANCIÓN</div>
-        </div>
       </div>
     </div>
       <div class="music-now-strip">
@@ -2974,7 +2946,7 @@ img,video,canvas{max-width:100%}
   const visualizer = document.getElementById('visualizer');
   const visualizerStatus = document.getElementById('visualizerStatus');
   const vctx = visualizer.getContext('2d');
-  let audioCtx, analyser, sourceNode, gainNode, freqData, animationId;
+  let audioCtx, analyser, sourceNode, freqData, animationId;
 
   let tracks = [
     {name:'Machine', artist:'Joris Voorn · Roddy Lima · Taylr Renee', url:'02-joris-voorn-machine.mp3', fallbackUrl:'music/02-joris-voorn-machine.mp3', coverUrl:null, dbId:null, public:true},
@@ -2982,7 +2954,8 @@ img,video,canvas{max-width:100%}
     {name:'Nothing Like the Rain', artist:'2 Unlimited', url:'04-2-unlimited-nothing-like-the-rain.mp3', fallbackUrl:'music/04-2-unlimited-nothing-like-the-rain.mp3', coverUrl:null, dbId:null, public:true},
     {name:'Jump In', artist:'Sevren', url:'05-sevren-jump-in.mp3', coverUrl:null, dbId:null, public:true},
     {name:'Waiting', artist:'Dash Berlin · Emma Hewitt', url:'06-dash-berlin-waiting.mp3', coverUrl:null, dbId:null, public:true},
-    {name:'Everybody', artist:'DJ Bobo', url:'07-dj-bobo-everybody.mp3', coverUrl:null, dbId:null, public:true}
+    {name:'Everybody', artist:'DJ Bobo', url:'07-dj-bobo-everybody.mp3', coverUrl:null, dbId:null, public:true},
+    {name:'Mana - Lluvia Al Corazon', artist:'Mana', url:'music/1787986251347-b39b69a1.mp3', coverUrl:null, dbId:null, public:true}
   ];
   let current = -1;
 
@@ -2993,12 +2966,8 @@ img,video,canvas{max-width:100%}
       analyser.fftSize = 128;
       analyser.smoothingTimeConstant = 0.82;
       sourceNode = audioCtx.createMediaElementSource(audio);
-      gainNode = audioCtx.createGain();
-      sourceNode.connect(gainNode);
-      gainNode.connect(analyser);
+      sourceNode.connect(analyser);
       analyser.connect(audioCtx.destination);
-      const savedGain = Number(localStorage.getItem('advanceddjs_gain_db') || 0);
-      gainNode.gain.value = Math.pow(10, savedGain/20);
       freqData = new Uint8Array(analyser.frequencyBinCount);
     }
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -3019,7 +2988,7 @@ img,video,canvas{max-width:100%}
     grad.addColorStop(0,'rgba(0,217,217,.26)');
     grad.addColorStop(.55,'rgba(26,124,255,.72)');
     grad.addColorStop(1,'rgba(8,231,231,1)');
-    const bars = 24, gap = 4, bw = Math.max(3,(w-gap*(bars-1))/bars);
+    const bars = 28, gap = 4, bw = Math.max(3,(w-gap*(bars-1))/bars);
     if (analyser) analyser.getByteFrequencyData(freqData);
     if (analyser && freqData && !audio.paused){
       const bassCount = Math.max(3, Math.floor(freqData.length * .16));
@@ -3033,23 +3002,9 @@ img,video,canvas{max-width:100%}
       const energy = Math.max(bassEnergy*.78,avgEnergy*.58);
       document.documentElement.style.setProperty('--music-energy',energy.toFixed(3));
       document.documentElement.style.setProperty('--music-energy-soft',avgEnergy.toFixed(3));
-      const mixDb=Math.max(-60,Math.min(0,20*Math.log10(Math.max(.001,avgEnergy))));
-      const mixPct=Math.max(0,Math.min(100,(mixDb+60)/60*100));
-      const mixDbEl=document.getElementById('mixRealDb');
-      const mixFill=document.getElementById('mixRealFill');
-      const mixMsg=document.getElementById('mixRealMessage');
-      if(mixDbEl) mixDbEl.textContent=Math.round(mixDb)+' dB';
-      if(mixFill) mixFill.style.width=mixPct.toFixed(1)+'%';
-      if(mixMsg){mixMsg.textContent=mixDb>-6?'NIVEL MUY ALTO · REVISÁ LA GANANCIA':mixDb>-18?'ZONA NORMAL · NIVEL EQUILIBRADO':'SEÑAL BAJA · SUBÍ LA GANANCIA SUAVEMENTE';mixMsg.style.color=mixDb>-6?'#64dfff':mixDb>-18?'#65e5a8':'#9bacbd';}
     } else {
       document.documentElement.style.setProperty('--music-energy','0');
       document.documentElement.style.setProperty('--music-energy-soft','0');
-      const mixDbEl=document.getElementById('mixRealDb');
-      const mixFill=document.getElementById('mixRealFill');
-      const mixMsg=document.getElementById('mixRealMessage');
-      if(mixDbEl) mixDbEl.textContent='−∞';
-      if(mixFill) mixFill.style.width='0%';
-      if(mixMsg){mixMsg.textContent=current>=0?'PAUSADO':'EN ESPERA · REPRODUCÍ UNA CANCIÓN';mixMsg.style.color='#9bacbd';}
     }
     for(let i=0;i<bars;i++){
       const idx = freqData ? Math.floor((i/(bars-1))*(freqData.length-1)) : 0;
@@ -3361,13 +3316,11 @@ img,video,canvas{max-width:100%}
     if(!tracksExpand || !v12TrackList) return;
     const count = v12TrackList.querySelectorAll('.track').length;
     tracksExpand.hidden = count <= 3;
-    if(count <= 3){ v12TrackList.classList.remove('expanded'); const musicSection=document.getElementById('musica'); if(musicSection) musicSection.classList.remove('music-expanded'); tracksExpand.textContent='Descubrir 3 canciones más ↓'; }
+    if(count <= 3){ v12TrackList.classList.remove('expanded'); tracksExpand.textContent='Descubrir 3 canciones más ↓'; }
   }
   if(tracksExpand){
     tracksExpand.addEventListener('click',()=>{
       const open=v12TrackList.classList.toggle('expanded');
-      const musicSection=document.getElementById('musica');
-      if(musicSection) musicSection.classList.toggle('music-expanded',open);
       tracksExpand.textContent=open ? 'Mostrar las primeras 3 ↑' : 'Descubrir 3 canciones más ↓';
     });
   }
@@ -3855,77 +3808,6 @@ img,video,canvas{max-width:100%}
   audio.addEventListener('pause',sync);
   audio.addEventListener('ended',sync);
   sync();
-})();
-</script>
-
-
-<script>
-(() => {
-  // GANANCIA REAL
-  const slider=document.getElementById('gainControl');
-  const value=document.getElementById('gainValue');
-  const saved=Number(localStorage.getItem('advanceddjs_gain_db') || 0);
-  if(slider) slider.value=String(saved);
-  function applyGain(){
-    const db=Number(slider?.value || 0);
-    if(value) value.textContent=(db>0?'+':'')+db.toFixed(1)+' dB';
-    localStorage.setItem('advanceddjs_gain_db',String(db));
-    if(typeof gainNode!=='undefined' && gainNode && typeof audioCtx!=='undefined' && audioCtx){
-      gainNode.gain.setTargetAtTime(Math.pow(10,db/20),audioCtx.currentTime,.015);
-    }
-  }
-  slider?.addEventListener('input',applyGain);
-  applyGain();
-
-  // FECHAS PÚBLICAS
-  // El Control puede publicar window.ADVANCEDDJS_DATES antes de este bloque.
-  // También admite dates.json en la raíz del sitio para una integración limpia.
-  const list=document.getElementById('datesList');
-  const badgeTitle=document.getElementById('datesBadgeTitle');
-  const badgeText=document.getElementById('datesBadgeText');
-
-  function normalizeDate(d){
-    return {
-      date:d.date || d.fecha || '',
-      place:d.place || d.lugar || '',
-      title:d.title || d.titulo || 'AdvancedDJs Live'
-    };
-  }
-  function renderDates(input){
-    if(!list) return;
-    const today=new Date(); today.setHours(0,0,0,0);
-    const dates=(Array.isArray(input)?input:[]).map(normalizeDate)
-      .filter(d=>d.date && !isNaN(new Date(d.date+'T12:00:00')))
-      .filter(d=>new Date(d.date+'T12:00:00')>=today)
-      .sort((a,b)=>a.date.localeCompare(b.date));
-    list.innerHTML='';
-    if(!dates.length){
-      list.innerHTML='<div class="dates-empty">Todavía no hay fechas publicadas. Cuando cargues una desde AdvancedDJs Control aparecerá en este sector.</div>';
-      if(badgeTitle) badgeTitle.textContent='PRÓXIMAMENTE';
-      if(badgeText) badgeText.textContent='Nuevas fechas';
-      return;
-    }
-    const months=['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-    dates.forEach(d=>{
-      const dt=new Date(d.date+'T12:00:00');
-      const card=document.createElement('article');
-      card.className='date-card';
-      card.innerHTML=`<div class="date-day"><strong>${String(dt.getDate()).padStart(2,'0')}</strong><span>${months[dt.getMonth()]}</span></div><div class="date-info"><b>${d.title}</b><span>${d.place || 'Lugar a confirmar'} · ${dt.toLocaleDateString('es-AR',{year:'numeric'})}</span></div>`;
-      list.appendChild(card);
-    });
-    if(badgeTitle) badgeTitle.textContent=dates.length===1?'1 FECHA':' '+dates.length+' FECHAS';
-    if(badgeText) badgeText.textContent='Agenda confirmada';
-  }
-
-  async function loadDates(){
-    if(Array.isArray(window.ADVANCEDDJS_DATES)){ renderDates(window.ADVANCEDDJS_DATES); return; }
-    try{
-      const r=await fetch('dates.json?ts='+Date.now(),{cache:'no-store'});
-      if(r.ok){ const data=await r.json(); renderDates(data); return; }
-    }catch(e){}
-    renderDates([]);
-  }
-  loadDates();
 })();
 </script>
 
